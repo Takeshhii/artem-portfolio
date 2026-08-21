@@ -22,7 +22,7 @@ in the frontmatter above.
    - `category` — one of: AI, Automation, Growth, SEO, Product, Experiments,
      Building in public.
    - `tags` — a list, shown at the end of the article.
-   - `ogImage` — optional, e.g. `/images/your-image.png`. Falls back to the site
+   - `ogImage` — optional, e.g. `/images/your-image.webp`. Falls back to the site
      default.
 3. Write the body in Markdown below the frontmatter.
 4. Set `draft: false` (or remove the line).
@@ -46,5 +46,5 @@ Use `##` for section headings and `###` for subsections. Lists:
 print("hello")
 ```
 
-Images go in `public/images/` and are referenced as `![Alt text](/images/file.png)`.
+Images go in `public/images/` and are referenced as `![Alt text](/images/file.webp)`.
 Always write meaningful alt text — it matters for both accessibility and search.
