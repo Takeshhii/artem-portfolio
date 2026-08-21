@@ -1,0 +1,13 @@
+{
+  "name": "Artem Tarasov — SEO · Web · AI",
+  "short_name": "Artem T.",
+  "description": "Portfolio of Artem Tarasov — SEO specialist, web developer and startup founder.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C0F16",
+  "theme_color": "#7B9BD1",
+  "icons": [
+    { "src": "images/mascot-icon.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/mascot-icon.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
