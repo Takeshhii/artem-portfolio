@@ -16,8 +16,7 @@ export const SITE = {
 export const LINKS = {
   github: 'https://github.com/Takeshhii',
   email: 'tarasovao2005@gmail.com',
-  // Add the LinkedIn profile URL here once it exists; the link appears automatically.
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/artem-tarasov-466a72356/',
 };
 
 export const NAV = [
