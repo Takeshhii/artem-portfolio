@@ -1,0 +1,120 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  /** Shown in the address bar. */
+  url?: string;
+  /** Crop tall screenshots to a pleasant ratio instead of letting them run long. */
+  ratio?: string;
+  loading?: 'lazy' | 'eager';
+  width?: number;
+  height?: number;
+}
+
+const {
+  src,
+  alt,
+  url,
+  ratio = '16 / 10',
+  loading = 'lazy',
+  width = 1440,
+  height = 900,
+} = Astro.props;
+---
+
+<figure class="frame">
+  <div class="frame__bar">
+    <span class="frame__dots" aria-hidden="true">
+      <i></i><i></i><i></i>
+    </span>
+    {url && <span class="frame__url">{url}</span>}
+  </div>
+  <div class="frame__viewport" style={`aspect-ratio: ${ratio};`}>
+    <img src={src} alt={alt} loading={loading} decoding="async" width={width} height={height} />
+  </div>
+</figure>
+
+<style>
+  .frame {
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow:
+      0 1px 2px rgba(20, 22, 26, 0.04),
+      0 12px 32px -12px rgba(20, 22, 26, 0.16);
+  }
+
+  .frame__bar {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.6rem 0.85rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .frame__dots {
+    display: inline-flex;
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .frame__dots i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+  }
+
+  .frame__url {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 0.22rem 0.7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .frame__viewport {
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+
+  .frame__viewport img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  /* On dark sections the chrome should not glare. */
+  :global(.dark) .frame {
+    border-color: var(--dark-line);
+    background: var(--dark-surface);
+    box-shadow: 0 20px 48px -20px rgba(0, 0, 0, 0.7);
+  }
+
+  :global(.dark) .frame__bar {
+    background: var(--dark-surface);
+    border-bottom-color: var(--dark-line);
+  }
+
+  :global(.dark) .frame__dots i {
+    background: #2f343c;
+    border-color: #383e47;
+  }
+
+  :global(.dark) .frame__url {
+    background: var(--dark-bg);
+    border-color: var(--dark-line);
+    color: var(--dark-muted);
+  }
+</style>

@@ -1,0 +1,195 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import { SITE } from '../../config';
+
+const posts = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const planned = [
+  'How I automated an SEO content pipeline with LLMs and WordPress',
+  "SEO automation: what should and shouldn't be automated",
+  'Building an AI career assistant: product and architecture lessons',
+  'What working in SEO taught me about building AI products',
+];
+---
+
+<Base
+  title={`Writing — ${SITE.name}`}
+  description="Notes on AI automation, growth systems, technical SEO and building products."
+>
+  <section class="head">
+    <div class="wrap">
+      <p class="label">Writing</p>
+      <h1 class="head__title">Notes on automation, growth and building products.</h1>
+      <p class="lead head__lead">
+        Working notes rather than tutorials — what I'm building, what broke, and what
+        turned out to be worth automating.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      {
+        posts.length > 0 ? (
+          <ul class="list">
+            {posts.map((post) => (
+              <li>
+                <a class="entry" href={`/writing/${post.id}`}>
+                  <div class="entry__main">
+                    <h2 class="entry__title">{post.data.title}</h2>
+                    <p class="entry__excerpt">{post.data.excerpt}</p>
+                  </div>
+                  <div class="entry__meta">
+                    <span class="label">{post.data.category}</span>
+                    <time class="label" datetime={post.data.date.toISOString()}>
+                      {post.data.date.toLocaleDateString('en-GB', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      })}
+                    </time>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="empty">
+            <p class="lead">No articles published yet — the first pieces are in progress.</p>
+            <p class="empty__label label">What I'm writing about</p>
+            <ul class="planned">
+              {planned.map((p) => (
+                <li>{p}</li>
+              ))}
+            </ul>
+            <p class="empty__note">
+              In the meantime, the <a href="/#work">case studies</a> go into the same
+              detail on how these systems are actually built.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2.5rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .head__title {
+    font-size: clamp(2.25rem, 1.7rem + 2.6vw, 3.75rem);
+    max-width: 20ch;
+    margin-block: 1rem 1.5rem;
+  }
+
+  .head__lead {
+    max-width: 58ch;
+  }
+
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .list li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .list li:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    padding: 1.75rem 0;
+    transition: padding-left 0.22s ease;
+  }
+
+  .entry:hover {
+    padding-left: 0.5rem;
+  }
+
+  .entry__title {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 560;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+  }
+
+  .entry:hover .entry__title {
+    color: var(--accent);
+  }
+
+  .entry__excerpt {
+    margin-top: 0.5rem;
+    max-width: 62ch;
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+  }
+
+  .entry__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .empty {
+    max-width: 60ch;
+  }
+
+  .empty__label {
+    display: block;
+    margin-top: 2.5rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .planned {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .planned li {
+    padding: 0.95rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+
+  .empty__note {
+    margin-top: 1.75rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .empty__note a {
+    color: var(--accent);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  @media (max-width: 640px) {
+    .entry {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .entry__meta {
+      flex-direction: row;
+      gap: 0.75rem;
+      text-align: left;
+    }
+  }
+</style>

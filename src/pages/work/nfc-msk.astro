@@ -1,0 +1,91 @@
+---
+import Work from '../../layouts/Work.astro';
+import BrowserFrame from '../../components/BrowserFrame.astro';
+---
+
+<Work
+  title="NFC MSK"
+  category="Growth · Search · Business"
+  summary="Search and commerce infrastructure built for an NFC products business — a standalone WordPress theme with redirect management, indexing controls and a consistent product-page structure."
+  description="Search and commerce infrastructure for an NFC products business: a standalone WordPress theme with built-in technical SEO — redirect management, indexing controls and structured product pages."
+  year="2026"
+  role="Owner — business, search strategy and implementation"
+  status="Live, in production"
+  stack={['PHP', 'WordPress', 'Vanilla CSS/JS', 'Technical SEO']}
+  ogImage="/images/nfc-home.png"
+  links={[{ label: 'Visit nfc-msk.ru', href: 'https://nfc-msk.ru' }, { label: 'View on GitHub', href: 'https://github.com/Takeshhii/nfc-msk-theme' }]}
+>
+  <BrowserFrame
+    src="/images/nfc-home.png"
+    alt="NFC MSK storefront home page showing the product catalogue"
+    url="nfc-msk.ru"
+    loading="eager"
+    ratio="16 / 10"
+  />
+
+  <h2>Context</h2>
+  <p>
+    NFC MSK is a business I run selling NFC products — cards, tags, stickers,
+    keychains, bracelets, badges and plates. Because organic search is the acquisition
+    channel, the site is not a brochure: it is the commercial infrastructure.
+  </p>
+
+  <h2>The problem</h2>
+  <p>
+    The site ran on a purchased theme that was heavier than it needed to be and kept
+    getting in the way of exactly the things that matter for search — URL structure,
+    indexation of near-duplicate pages, and metadata at the template level. Page-builder
+    abstractions make that kind of control harder rather than easier.
+  </p>
+
+  <h2>What I built</h2>
+  <p>
+    A standalone theme with no parent theme and no page builder, where the search
+    behaviour is part of the templates rather than bolted on afterwards.
+  </p>
+  <ul>
+    <li>
+      <strong>Redirect management</strong> — a maintained map collapsing legacy
+      duplicate URL paths onto their canonical versions.
+    </li>
+    <li>
+      <strong>Indexing controls</strong> — paginated blog listings are deliberately
+      excluded from the index while the articles themselves stay fully discoverable
+      through the sitemap and related-article links. Nothing drops out of the index; it
+      simply stops competing with the real article pages.
+    </li>
+    <li>
+      <strong>Consistent product pages</strong> — every product follows the same
+      structure: shared blocks, FAQ, pricing, gallery and a collapsible long-form
+      section, so the template does the SEO work and the copy does not have to.
+    </li>
+    <li>
+      <strong>Editable without engineering</strong> — product content is plain markup
+      inside the templates by design, not arrays or shortcodes, so copy can be changed
+      without touching logic.
+    </li>
+  </ul>
+
+  <h2>My role</h2>
+  <p>
+    I own the business, the search strategy and the implementation. The redirect and
+    indexation logic exists specifically because I am the one responsible for the
+    site's organic performance and needed control the previous theme did not offer.
+  </p>
+
+  <h2>Outcome</h2>
+  <p>
+    Full control over how the catalogue is crawled and indexed, on infrastructure I can
+    change directly — and a product-page structure that stays consistent as the
+    catalogue grows.
+  </p>
+
+  <h2>Lessons</h2>
+  <p>
+    The operational detail that costs the most time is not in the code: the host runs a
+    cache and minification layer that does not invalidate automatically, so a theme
+    version bump is not enough — the cache has to be cleared explicitly after every
+    deploy or the old assets keep serving silently. Automating that deploy step is the
+    next thing worth fixing.
+  </p>
+</Work>

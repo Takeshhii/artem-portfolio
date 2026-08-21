@@ -1,0 +1,108 @@
+---
+import Work from '../../layouts/Work.astro';
+import BrowserFrame from '../../components/BrowserFrame.astro';
+---
+
+<Work
+  title="Bottle Label Studio"
+  category="Product · Engineering"
+  summary="A browser tool that applies label artwork to bottle photography with perspective-aware warping and shading sampled from the photograph itself."
+  description="Browser tool for compositing product labels onto bottle photos with perspective-aware warping and realistic shading. React, TypeScript and PixiJS, fully client-side."
+  year="2026"
+  role="Sole author — rendering approach and implementation"
+  status="In internal use"
+  stack={['React', 'TypeScript', 'PixiJS v8', 'Vite', 'Tailwind', 'zustand']}
+  ogImage="/images/bottle-output.png"
+  links={[{ label: 'View on GitHub', href: 'https://github.com/Takeshhii/bottle-label-studio' }]}
+  schemaType="SoftwareApplication"
+>
+  <BrowserFrame
+    src="/images/bottle-ui.png"
+    alt="Bottle Label Studio interface with a label positioned on a bottle photograph and adjustment handles visible"
+    url="bottle-label-studio"
+    loading="eager"
+    ratio="16 / 10"
+  />
+
+  <h2>The problem</h2>
+  <p>
+    Every time a label design changed, the options were a physical reshoot or manually
+    warping and shading the artwork onto a bottle photograph in an image editor — per
+    bottle, per variant. Neither scales while a design is still being iterated on.
+  </p>
+
+  <h2>The approach</h2>
+  <p>
+    Register a bottle once: upload a clean studio photograph, mark the four corners of
+    the label area, set the curvature. After that, producing a new mockup is three
+    steps — pick the bottle, drop in the artwork, export.
+  </p>
+  <p>
+    The interesting part is making the result look printed rather than pasted. Two
+    things do that work:
+  </p>
+
+  <h3>Perspective-aware warping</h3>
+  <p>
+    The label is mapped onto a subdivided plane anchored to the marked label area.
+    Horizontally, columns compress toward the edges following the visible wrap angle,
+    with a slight vertical bow so the top and bottom edges read like the ellipse you
+    actually see on a cylinder.
+  </p>
+
+  <h3>Borrowed shading</h3>
+  <p>
+    Rather than hand-painting highlights and shadows per design, the tool samples the
+    luminance already present in the bottle photograph across the label area,
+    normalizes it, and multiplies it back over the warped artwork. Any label picks up
+    that bottle's real highlights and shadows automatically, because it is reusing the
+    photograph's own lighting rather than simulating new lighting.
+  </p>
+
+  <figure>
+    <BrowserFrame
+      src="/images/bottle-output.png"
+      alt="Exported result: a label composited onto an aluminium bottle, with the metal's reflections showing through the artwork"
+      url="exported result — full resolution PNG"
+      ratio="4 / 3"
+    />
+  </figure>
+
+  <h2>Implementation notes</h2>
+  <ul>
+    <li>
+      Everything composites at the source photograph's native resolution, so the export
+      is as sharp as the input.
+    </li>
+    <li>
+      Fully client-side — no backend, no accounts, no uploads. Bottle setups persist to
+      local storage with JSON import/export for moving between machines.
+    </li>
+    <li>
+      State is kept in a store with slice-level subscriptions rather than React context,
+      because the canvas updates imperatively and dragging a corner should not
+      re-render the component tree.
+    </li>
+    <li>
+      Corner placement is recorded in photo-pixel space rather than screen space, so
+      precision does not depend on how the canvas happens to be scaled.
+    </li>
+  </ul>
+
+  <h2>Outcome</h2>
+  <p>
+    A label design becomes a usable product image in seconds, removing the manual
+    mockup step for each new variant. The screenshots on this page are real exports
+    produced by a script that drives the actual application headlessly, so they are
+    reproducible from the repository rather than hand-picked.
+  </p>
+
+  <h2>Lessons</h2>
+  <p>
+    The borrowed-shading approach only works as well as the lighting in the source
+    photograph — even studio light with the label area facing the camera gives the best
+    result, and uneven light in the input shows up directly in the output. Getting the
+    warp to read as a real cylinder rather than a bent flat image took several
+    iterations on the compression curve.
+  </p>
+</Work>

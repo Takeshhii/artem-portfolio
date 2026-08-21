@@ -1,0 +1,203 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { SITE, LINKS } from '../../config';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('writing', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await render(post);
+
+const readingTime = remarkPluginFrontmatter?.minutesRead ?? null;
+const dateLabel = post.data.date.toLocaleDateString('en-GB', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.excerpt,
+  datePublished: post.data.date.toISOString(),
+  author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  publisher: { '@type': 'Person', name: SITE.name, url: SITE.url },
+  mainEntityOfPage: new URL(Astro.url.pathname, SITE.url).href,
+  keywords: post.data.tags.join(', '),
+};
+---
+
+<Base
+  title={`${post.data.title} — ${SITE.name}`}
+  description={post.data.excerpt}
+  ogImage={post.data.ogImage}
+  schema={schema}
+>
+  <article class="article">
+    <header class="article__head">
+      <div class="wrap wrap--narrow">
+        <a class="label article__back" href="/writing">← Writing</a>
+        <p class="label article__cat">{post.data.category}</p>
+        <h1 class="article__title">{post.data.title}</h1>
+        <p class="lead article__excerpt">{post.data.excerpt}</p>
+        <p class="label article__meta">
+          <time datetime={post.data.date.toISOString()}>{dateLabel}</time>
+          {readingTime && <span> · {readingTime}</span>}
+        </p>
+      </div>
+    </header>
+
+    <div class="wrap wrap--narrow article__body">
+      <Content />
+
+      {
+        post.data.tags.length > 0 && (
+          <ul class="tags article__tags">
+            {post.data.tags.map((t: string) => (
+              <li class="tag">{t}</li>
+            ))}
+          </ul>
+        )
+      }
+
+      <footer class="article__footer">
+        <a class="label" href="/writing">← All writing</a>
+        <a class="label" href={LINKS.github} target="_blank" rel="noopener">GitHub →</a>
+      </footer>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .wrap--narrow {
+    max-width: var(--wrap-narrow);
+  }
+
+  .article__head {
+    padding-block: clamp(2.5rem, 6vw, 4rem) clamp(2rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .article__back {
+    display: inline-block;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s ease;
+  }
+
+  .article__back:hover {
+    color: var(--accent);
+  }
+
+  .article__cat {
+    color: var(--accent);
+  }
+
+  .article__title {
+    font-size: clamp(2.1rem, 1.6rem + 2.4vw, 3.35rem);
+    margin-block: 1rem 1.25rem;
+  }
+
+  .article__excerpt {
+    max-width: 60ch;
+  }
+
+  .article__meta {
+    margin-top: 1.75rem;
+  }
+
+  .article__body {
+    padding-block: clamp(2.5rem, 5vw, 3.5rem) clamp(3rem, 7vw, 5rem);
+  }
+
+  .article__body :global(h2) {
+    font-size: clamp(1.5rem, 1.25rem + 1.1vw, 2rem);
+    margin-block: 2.75rem 0.9rem;
+  }
+
+  .article__body :global(h3) {
+    font-size: var(--step-h3);
+    margin-block: 2rem 0.6rem;
+  }
+
+  .article__body :global(p) {
+    margin-bottom: 1.25rem;
+    color: var(--ink-soft);
+  }
+
+  .article__body :global(ul),
+  .article__body :global(ol) {
+    margin-block: 0 1.5rem;
+    padding-left: 1.15rem;
+    color: var(--ink-soft);
+  }
+
+  .article__body :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .article__body :global(li::marker) {
+    color: var(--accent);
+  }
+
+  .article__body :global(a) {
+    color: var(--accent);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  .article__body :global(blockquote) {
+    margin: 2rem 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent);
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .article__body :global(pre) {
+    background: var(--dark-bg);
+    color: var(--dark-ink);
+    padding: 1.15rem 1.35rem;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    font-size: 0.875rem;
+    margin-block: 1.5rem;
+  }
+
+  .article__body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+  }
+
+  .article__body :global(:not(pre) > code) {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 0.1em 0.4em;
+  }
+
+  .article__body :global(img) {
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    margin-block: 1.75rem;
+  }
+
+  .article__tags {
+    margin-top: 2.5rem;
+  }
+
+  .article__footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .article__footer a:hover {
+    color: var(--accent);
+  }
+</style>

@@ -1,0 +1,587 @@
+---
+import Base from '../layouts/Base.astro';
+import BrowserFrame from '../components/BrowserFrame.astro';
+import WorkItem from '../components/WorkItem.astro';
+import FlowDiagram from '../components/FlowDiagram.astro';
+import { LINKS, SITE } from '../config';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('writing', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const areas = [
+  {
+    title: 'AI & Automation',
+    body: 'LLM workflows, API integrations and process automation — connecting models, data and the tools a business already runs on.',
+  },
+  {
+    title: 'Growth & Search',
+    body: 'Technical SEO, search architecture, organic acquisition and content systems that keep producing without manual effort.',
+  },
+  {
+    title: 'Product',
+    body: 'Building and shipping small digital products end-to-end, from the problem statement through to something people actually use.',
+  },
+  {
+    title: 'Systems',
+    body: 'Connecting tools, data and workflows so operations run as one system instead of a set of manual, repeated steps.',
+  },
+];
+
+const projects = [
+  {
+    title: 'ZHIVA',
+    meta: 'E-commerce · Growth · SEO · Shopify',
+    body: 'Live Shopify jewelry business where I work on organic search, SEO architecture and content across products and collections.',
+    href: 'https://zhivajewelry.com',
+    external: true,
+  },
+  {
+    title: 'Conversion Collective',
+    meta: 'Web · Conversion · Analytics',
+    body: 'Site for a B2B sales consulting business, structured around a single primary acquisition and booking flow.',
+    href: 'https://github.com/Takeshhii/conversion-collective',
+    external: true,
+  },
+  {
+    title: 'bike-theft-tracker',
+    meta: 'React · REST API · Auth · 2023',
+    body: 'SPA for logging bike-theft cases with JWT authentication and role-based access. First project I built against a real authenticated API.',
+    href: 'https://github.com/Takeshhii/bike-theft-tracker',
+    external: true,
+  },
+  {
+    title: 'kanban-board',
+    meta: 'React · Routing · State · 2023',
+    body: 'Task board with four workflow columns, per-task routing and local persistence. Where component decomposition and lifted state clicked for me.',
+    href: 'https://github.com/Takeshhii/kanban-board',
+    external: true,
+  },
+];
+
+const trajectory = [
+  {
+    year: '2022',
+    title: 'Started building',
+    body: 'Learning software development and shipping React applications while studying.',
+  },
+  {
+    year: '2023 — 2025',
+    title: 'Commercial growth work',
+    body: 'Technical SEO, audits, content systems and web projects for real businesses, including international clients.',
+  },
+  {
+    year: '2026',
+    title: 'AI, automation & product',
+    body: 'Building AI-powered automation, growth systems and my own digital products.',
+  },
+];
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Artem Tarasov',
+    url: SITE.url,
+    jobTitle: 'AI Growth, Automation & Product',
+    description: SITE.description,
+    email: `mailto:${LINKS.email}`,
+    sameAs: [LINKS.github, LINKS.linkedin].filter(Boolean),
+    knowsAbout: [
+      'AI automation',
+      'Large language model workflows',
+      'Technical SEO',
+      'Growth engineering',
+      'Product development',
+      'Web development',
+    ],
+    alumniOf: {
+      '@type': 'CollegeOrUniversity',
+      name: 'Financial University under the Government of the Russian Federation',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE.name,
+    url: SITE.url,
+  },
+];
+---
+
+<Base schema={schema}>
+  <!-- ================= Hero ================= -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="label hero__eyebrow">AI · Growth · Automation · Product</p>
+
+      <h1 class="hero__title">
+        I build AI-powered growth systems and digital products.
+      </h1>
+
+      <p class="lead hero__lead">
+        My background is in SEO and digital growth. Today I build automation systems,
+        AI-powered workflows and products that turn repetitive growth work into
+        systems that keep running on their own.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn" href="#work">View selected work</a>
+        <a class="btn btn--ghost" href={LINKS.github} target="_blank" rel="noopener">GitHub</a>
+      </div>
+
+      <p class="label hero__status">{SITE.location}</p>
+    </div>
+  </section>
+
+  <!-- ================= Selected work ================= -->
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Selected work</h2>
+        <p class="label">Problem · System · Outcome</p>
+      </div>
+
+      <WorkItem
+        index="01"
+        title="AIRA"
+        category="AI Product · Automation"
+        problem="Students are the group with the least leverage in hiring and the least time to spend on it — job search means repeating the same manual steps across dozens of listings."
+        system="An AI career platform combining job discovery, matching, application workflows and personalized career assistance in one place, currently working with HH."
+        outcome="A live product students can use to run their search from a single dashboard instead of a spreadsheet and a dozen browser tabs."
+        tags={['AI Product', 'Automation', 'Next.js', 'Product']}
+        href="/work/aira"
+      >
+        <BrowserFrame
+          slot="media"
+          src="/images/aira-app.png"
+          alt="AIRA career platform interface showing the sign-up panel and product headline"
+          url="my-student-aira.com"
+          loading="eager"
+          ratio="16 / 11"
+        />
+      </WorkItem>
+
+      <WorkItem
+        index="02"
+        title="AI WordPress Publisher"
+        category="AI · Automation · SEO"
+        problem="Running several content properties meant repeating the same manual work: write, add SEO metadata, schedule, publish — for every single article."
+        system="A configurable Python pipeline connecting keyword briefs, an LLM, validation, scheduling logic and the WordPress REST API, with resumable state and de-duplication."
+        outcome="Multiple content workflows now run from one shared configuration instead of being managed by hand, at a publishing pace that stays deliberately human."
+        tags={['Python', 'LLM APIs', 'WordPress REST API', 'SEO']}
+        href="/work/ai-wordpress-publisher"
+        flip={true}
+      >
+        <div slot="media">
+          <FlowDiagram
+            caption="Pipeline architecture"
+            steps={[
+              { label: 'Config & briefs', note: 'Keyword briefs per site' },
+              { label: 'LLM generation', note: 'Article + SEO metadata' },
+              { label: 'Validation', note: 'De-dup, structure checks' },
+              { label: 'Scheduler', note: 'Paced publishing slots' },
+              { label: 'WordPress API', note: 'Publishes on schedule' },
+            ]}
+          />
+        </div>
+      </WorkItem>
+
+      <WorkItem
+        index="03"
+        title="Bottle Label Studio"
+        category="Product · Engineering"
+        problem="Every label design change meant either a physical reshoot or manually warping and shading artwork onto a bottle photo in an image editor."
+        system="A browser tool that applies label artwork to bottle photography with perspective-aware warping and shading sampled from the photograph itself, exporting at native resolution."
+        outcome="A label design becomes a usable product image in seconds, removing the manual mockup step for each new variant."
+        tags={['React', 'TypeScript', 'PixiJS', 'Client-side']}
+        href="/work/bottle-label-studio"
+      >
+        <BrowserFrame
+          slot="media"
+          src="/images/bottle-ui.png"
+          alt="Bottle Label Studio interface with a label positioned on a bottle photograph"
+          url="bottle-label-studio"
+          ratio="16 / 11"
+        />
+      </WorkItem>
+
+      <WorkItem
+        index="04"
+        title="NFC MSK"
+        category="Growth · Search · Business"
+        problem="A purchased WordPress theme made search-level control harder than it needed to be — URL structure, indexation of near-duplicate pages and template metadata were all fighting the platform."
+        system="Search and commerce infrastructure built from scratch: a standalone theme with redirect management, indexing controls and a consistent product-page structure."
+        outcome="Full control over how the catalogue is crawled and indexed, with product content that can be edited without touching application logic."
+        tags={['WordPress', 'PHP', 'Technical SEO', 'E-commerce']}
+        href="/work/nfc-msk"
+        flip={true}
+      >
+        <BrowserFrame
+          slot="media"
+          src="/images/nfc-home.png"
+          alt="NFC MSK storefront home page"
+          url="nfc-msk.ru"
+          ratio="16 / 11"
+        />
+      </WorkItem>
+    </div>
+  </section>
+
+  <!-- ================= What I work on ================= -->
+  <section class="section dark" id="areas">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What I work on</h2>
+        <p class="label">Areas of focus</p>
+      </div>
+
+      <div class="areas">
+        {
+          areas.map((a) => (
+            <div class="area reveal">
+              <h3>{a.title}</h3>
+              <p class="area__body">{a.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Projects ================= -->
+  <section class="section" id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <a class="label section-head__link" href={LINKS.github} target="_blank" rel="noopener">
+          All on GitHub →
+        </a>
+      </div>
+
+      <div class="grid">
+        {
+          projects.map((p) => (
+            <a
+              class="card reveal"
+              href={p.href}
+              target={p.external ? '_blank' : undefined}
+              rel={p.external ? 'noopener' : undefined}
+            >
+              <p class="label">{p.meta}</p>
+              <h3 class="card__title">{p.title}</h3>
+              <p class="card__body">{p.body}</p>
+              <span class="card__arrow" aria-hidden="true">→</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Writing ================= -->
+  <section class="section section--tight" id="writing">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Writing</h2>
+        <a class="label section-head__link" href="/writing">All writing →</a>
+      </div>
+
+      {
+        articles.length > 0 ? (
+          <ul class="posts">
+            {articles.slice(0, 3).map((post) => (
+              <li>
+                <a class="post" href={`/writing/${post.id}`}>
+                  <span class="post__title">{post.data.title}</span>
+                  <span class="post__meta label">
+                    {post.data.category} ·{' '}
+                    {post.data.date.toLocaleDateString('en-GB', {
+                      day: 'numeric',
+                      month: 'short',
+                      year: 'numeric',
+                    })}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div class="empty reveal">
+            <p class="lead">
+              Notes on AI automation, growth systems and building products — first
+              pieces in progress.
+            </p>
+            <p class="empty__note">
+              Topics I'm writing about: automating an SEO content pipeline with LLMs,
+              what should and shouldn't be automated in search, and product lessons
+              from building an AI career assistant.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <!-- ================= About ================= -->
+  <section class="section" id="about">
+    <div class="wrap about">
+      <div class="about__intro">
+        <div class="section-head">
+          <h2>About</h2>
+        </div>
+        <p class="lead">
+          I'm Artem Tarasov, studying Business Informatics and working with commercial
+          projects alongside it.
+        </p>
+        <p class="about__body">
+          SEO is where my commercial experience started, and it still shapes how I
+          think: it taught me acquisition, analytics, technical systems and how work
+          connects to a business outcome. What I add now is engineering — building the
+          automation and AI systems that used to be manual processes.
+        </p>
+      </div>
+
+      <ol class="timeline">
+        {
+          trajectory.map((t) => (
+            <li class="timeline__item reveal">
+              <span class="label timeline__year">{t.year}</span>
+              <div>
+                <h3 class="timeline__title">{t.title}</h3>
+                <p class="timeline__body">{t.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------------- Hero ---------------- */
+  .hero {
+    padding-block: clamp(4rem, 11vw, 9rem) clamp(3.5rem, 7vw, 6rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero__eyebrow {
+    color: var(--accent);
+  }
+
+  .hero__title {
+    font-size: var(--step-h1);
+    max-width: 17ch;
+    margin-block: 1.4rem 1.75rem;
+  }
+
+  .hero__lead {
+    max-width: 60ch;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+
+  .hero__status {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    display: inline-block;
+  }
+
+  /* ---------------- Shared ---------------- */
+  .section-head__link {
+    transition: color 0.2s ease;
+  }
+
+  .section-head__link:hover {
+    color: var(--accent);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  /* ---------------- Areas ---------------- */
+  .areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--dark-line);
+    border: 1px solid var(--dark-line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .area {
+    background: var(--dark-bg);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  .area h3 {
+    font-size: var(--step-h3);
+    margin-bottom: 0.75rem;
+  }
+
+  .area__body {
+    color: #c3c8ce;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /* ---------------- Cards ---------------- */
+  .card {
+    position: relative;
+    display: block;
+    padding: clamp(1.35rem, 2.5vw, 1.85rem);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--bg);
+    transition: border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px -18px rgba(20, 22, 26, 0.28);
+  }
+
+  .card__title {
+    font-size: var(--step-h3);
+    margin-block: 0.6rem 0.6rem;
+  }
+
+  .card__body {
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    padding-right: 1.5rem;
+  }
+
+  .card__arrow {
+    position: absolute;
+    right: 1.35rem;
+    bottom: 1.35rem;
+    color: var(--muted);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .card:hover .card__arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  /* ---------------- Writing ---------------- */
+  .posts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .posts li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .post {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.15rem 0;
+    transition: padding-left 0.2s ease, color 0.2s ease;
+  }
+
+  .post:hover {
+    padding-left: 0.5rem;
+    color: var(--accent);
+  }
+
+  .post__title {
+    font-size: 1.0625rem;
+    font-weight: 500;
+  }
+
+  .empty {
+    max-width: 62ch;
+  }
+
+  .empty__note {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  /* ---------------- About ---------------- */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .about__body {
+    margin-top: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 52ch;
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 1.5rem;
+    padding: 1.4rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .timeline__item:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .timeline__year {
+    padding-top: 0.25rem;
+    color: var(--accent);
+  }
+
+  .timeline__title {
+    font-size: 1.0625rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .timeline__body {
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .timeline__item {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+
+    .post {
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+  }
+</style>

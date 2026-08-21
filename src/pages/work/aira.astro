@@ -1,0 +1,92 @@
+---
+import Work from '../../layouts/Work.astro';
+import BrowserFrame from '../../components/BrowserFrame.astro';
+import FlowDiagram from '../../components/FlowDiagram.astro';
+---
+
+<Work
+  title="AIRA"
+  category="AI Product · Automation"
+  summary="An AI career platform for students, combining job discovery, matching, application workflows and personalized career assistance in one place."
+  description="AIRA — an AI career platform for students combining job discovery, matching, application workflows and personalized career assistance."
+  year="2025 — present"
+  role="Founder — product, positioning, growth and content systems"
+  status="Live product, in active development"
+  stack={['Next.js', 'Vercel', 'LLM APIs', 'HH integration', 'WordPress (content)']}
+  ogImage="/images/aira-app.png"
+  schemaType="SoftwareApplication"
+  links={[
+    { label: 'Visit AIRA', href: 'https://student-aira.com' },
+    { label: 'Open the app', href: 'https://my-student-aira.com' },
+  ]}
+>
+  <BrowserFrame
+    src="/images/aira-app.png"
+    alt="AIRA product interface: headline, early-access badge and the registration panel"
+    url="my-student-aira.com"
+    loading="eager"
+    ratio="16 / 10"
+  />
+
+  <h2>Context</h2>
+  <p>
+    Job search is a process problem before it is a matching problem. A student
+    applying to their first role repeats the same sequence dozens of times: find a
+    listing, decide whether it is worth applying to, tailor an application, send it,
+    and then try to remember where everything stands. The tooling that exists is
+    mostly built for experienced professionals who already know what they are looking
+    for.
+  </p>
+  <p>
+    AIRA started from that gap — the group with the least leverage in hiring is also
+    the group with the least time and the least guidance.
+  </p>
+
+  <h2>The problem</h2>
+  <p>
+    Students lose momentum in the repetitive middle of the process, not at the start.
+    Discovery, filtering and application tracking are spread across job boards,
+    documents and browser tabs, and none of it carries context forward. Nothing
+    remembers what you already applied to, what you decided about a role, or what to
+    do next.
+  </p>
+
+  <h2>What I built</h2>
+  <p>
+    A career platform that keeps the whole search in one place: job discovery through
+    an HH integration, saved roles, application workflows and personalized assistance
+    on top. Rather than a job board with an AI feature bolted on, the intent is that
+    the assistant sits inside the workflow the student is already running.
+  </p>
+
+  <FlowDiagram
+    caption="Product flow"
+    steps={[
+      { label: 'Discovery', note: 'Roles pulled in via HH' },
+      { label: 'Matching', note: 'Relevance to the student' },
+      { label: 'Application', note: 'Workflow per role' },
+      { label: 'Dashboard', note: 'State and next steps' },
+    ]}
+  />
+
+  <h2>My role</h2>
+  <p>
+    This is my own product. I work on the product definition, positioning, interface
+    direction and the growth side — including the content system that runs the
+    public site, which is powered by the{' '}
+    <a href="/work/ai-wordpress-publisher">content pipeline</a> I built for it.
+  </p>
+
+  <h2>Outcome</h2>
+  <p>
+    AIRA is live and in active development. Students can run their search from a
+    single dashboard instead of a spreadsheet and a dozen browser tabs, and the
+    surrounding content operation runs on automation rather than manual publishing.
+  </p>
+
+  <h2>What I'm working on next</h2>
+  <p>
+    Deepening the assistance layer so it does more of the repetitive judgement work —
+    and broadening discovery beyond a single source.
+  </p>
+</Work>

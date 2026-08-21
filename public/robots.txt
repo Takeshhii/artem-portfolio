@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tarasov-artem.netlify.app/sitemap-index.xml

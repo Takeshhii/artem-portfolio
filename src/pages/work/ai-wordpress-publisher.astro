@@ -1,0 +1,117 @@
+---
+import Work from '../../layouts/Work.astro';
+import FlowDiagram from '../../components/FlowDiagram.astro';
+---
+
+<Work
+  title="AI WordPress Publisher"
+  category="AI · Automation · SEO"
+  summary="A configurable Python pipeline that turns keyword briefs into SEO articles and publishes them through the WordPress REST API on a controlled schedule."
+  description="LLM content pipeline: keyword briefs in, scheduled WordPress articles with SEO metadata out. Python, LLM APIs and the WordPress REST API."
+  year="2026"
+  role="Sole author — architecture and implementation"
+  status="Active, running in production"
+  stack={['Python', 'LLM APIs', 'WordPress REST API', 'Yoast SEO', 'openpyxl']}
+  links={[{ label: 'View on GitHub', href: 'https://github.com/Takeshhii/ai-wordpress-publisher' }]}
+>
+  <FlowDiagram
+    caption="Pipeline architecture — brief in, scheduled post out"
+    steps={[
+      { label: 'Config & briefs', note: 'Per-site keyword briefs' },
+      { label: 'LLM generation', note: 'Article + SEO metadata' },
+      { label: 'Validation', note: 'De-dup, structure checks' },
+      { label: 'Scheduler', note: 'Paced publishing slots' },
+      { label: 'WordPress API', note: 'Publishes on schedule' },
+    ]}
+  />
+
+  <h2>The problem</h2>
+  <p>
+    I run two content-dependent properties — <a href="/work/aira">AIRA</a> and an
+    <a href="/work/nfc-msk">NFC products business</a> — and neither has a content team.
+    Producing and scheduling SEO articles by hand does not scale past a handful a week.
+  </p>
+  <p>
+    The obvious shortcut makes things worse. Generating everything and publishing it in
+    one batch produces a site that reads as machine-dumped rather than maintained — a
+    weak signal for readers and search engines alike. The pacing is not a cosmetic
+    detail; it is part of the requirement.
+  </p>
+
+  <h2>The system</h2>
+  <p>
+    A Python pipeline that takes a CSV of keyword briefs and produces fully-formed,
+    scheduled WordPress posts with no manual step in between.
+  </p>
+  <ul>
+    <li>
+      <strong>Briefs</strong> — one row per article: main keyword, secondary keywords,
+      search intent, an H2/H3 outline, internal-link targets and a target length.
+    </li>
+    <li>
+      <strong>Generation</strong> — the brief is expanded into a full article plus
+      Yoast SEO title, meta description and focus keyword.
+    </li>
+    <li>
+      <strong>Publishing</strong> — posts go through the WordPress REST API using a
+      scoped application password, created with <code>post_status: future</code> so
+      WordPress's own scheduler releases them. The pipeline does not need to be running
+      when a post goes live.
+    </li>
+    <li>
+      <strong>Pacing</strong> — each site has its own daily limit and publish-time
+      slots; the next open slot is chosen automatically with a random offset so timing
+      does not look scripted.
+    </li>
+    <li>
+      <strong>Resumability</strong> — every generated article is cached with its
+      publish state, and anything already published for a keyword is skipped. The run
+      can be stopped, resumed weeks later, or given a second batch of briefs without
+      producing duplicates.
+    </li>
+  </ul>
+
+  <h2>Handling pre-written content</h2>
+  <p>
+    A second path exists for articles that arrive already written, usually as
+    spreadsheet exports. Those exports are frequently templated — dozens of articles
+    built on one paragraph skeleton with the keyword swapped — which is a
+    near-duplicate content risk if published as-is. That path rewrites the templated
+    passages while preserving facts and structure, de-duplicates against everything
+    already live, and schedules the result through the same logic.
+  </p>
+
+  <h2>My role</h2>
+  <p>
+    Sole author. I designed the brief schema, the generation step, the WordPress
+    integration, the scheduling and pacing logic, and the de-duplication and resume
+    behaviour. The manual-import path was added after running into templated exports
+    in practice.
+  </p>
+
+  <h2>Outcome</h2>
+  <p>
+    Two content operations now run from one shared configuration instead of being
+    managed by hand. The pipeline has been used to plan and schedule 100 articles
+    across both sites from keyword briefs alone, at a publishing pace that stays
+    deliberately human.
+  </p>
+
+  <h2>Lessons</h2>
+  <ul>
+    <li>
+      The scheduling logic is a small part of the codebase and the part that decides
+      whether the output is perceived as credible. Automation quality is not only
+      about the generated text.
+    </li>
+    <li>
+      Making a pipeline resumable and de-duplicated from the start is what makes it
+      safe to actually use. Without it, every re-run is a risk.
+    </li>
+    <li>
+      Getting SEO metadata to write cleanly through the REST API took experimentation —
+      worth documenting, because it is the kind of integration detail that quietly
+      costs hours.
+    </li>
+  </ul>
+</Work>

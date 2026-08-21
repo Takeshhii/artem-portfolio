@@ -1,0 +1,171 @@
+---
+interface Props {
+  index: string;
+  title: string;
+  category: string;
+  problem: string;
+  system: string;
+  outcome: string;
+  tags: string[];
+  href: string;
+  linkLabel?: string;
+  /** Flip the media to the right on odd rows. */
+  flip?: boolean;
+}
+
+const {
+  index,
+  title,
+  category,
+  problem,
+  system,
+  outcome,
+  tags,
+  href,
+  linkLabel = 'Read case study',
+  flip = false,
+} = Astro.props;
+---
+
+<article class:list={['work', flip && 'work--flip', 'reveal']}>
+  <div class="work__media">
+    <slot name="media" />
+  </div>
+
+  <div class="work__body">
+    <p class="label work__meta">
+      <span>{index}</span>
+      <span class="work__dot" aria-hidden="true">/</span>
+      <span>{category}</span>
+    </p>
+
+    <h3 class="work__title">{title}</h3>
+
+    <dl class="work__facts">
+      <div>
+        <dt class="label">Problem</dt>
+        <dd>{problem}</dd>
+      </div>
+      <div>
+        <dt class="label">System</dt>
+        <dd>{system}</dd>
+      </div>
+      <div>
+        <dt class="label">Outcome</dt>
+        <dd>{outcome}</dd>
+      </div>
+    </dl>
+
+    <ul class="tags">
+      {tags.map((t) => <li class="tag">{t}</li>)}
+    </ul>
+
+    <a class="work__link" href={href}>
+      {linkLabel}
+      <span aria-hidden="true">→</span>
+    </a>
+  </div>
+</article>
+
+<style>
+  .work {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: center;
+    padding-block: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .work--flip .work__media {
+    order: 2;
+  }
+
+  .work__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .work__dot {
+    opacity: 0.45;
+  }
+
+  .work__title {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 1.3rem + 1.7vw, 2.6rem);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin-block: 0.7rem 1.4rem;
+  }
+
+  .work__facts {
+    margin: 0 0 1.6rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .work__facts div {
+    display: grid;
+    grid-template-columns: 92px 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .work__facts dt {
+    padding-top: 0.2rem;
+  }
+
+  .work__facts dd {
+    margin: 0;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .work__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.6rem;
+    font-weight: 500;
+    color: var(--accent);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    padding-bottom: 2px;
+    transition: gap 0.2s ease, border-color 0.2s ease;
+  }
+
+  .work__link:hover {
+    gap: 0.8rem;
+    border-bottom-color: var(--accent);
+  }
+
+  :global(.dark) .work {
+    border-top-color: var(--dark-line);
+  }
+
+  :global(.dark) .work__facts dd {
+    color: #c8ccd2;
+  }
+
+  :global(.dark) .work__link {
+    color: var(--accent-soft);
+    border-bottom-color: color-mix(in srgb, var(--accent-soft) 40%, transparent);
+  }
+
+  @media (max-width: 900px) {
+    .work {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .work--flip .work__media {
+      order: 0;
+    }
+
+    .work__facts div {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+</style>

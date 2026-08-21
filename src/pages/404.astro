@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+---
+
+<Base title={`Page not found — ${SITE.name}`} description="This page doesn't exist." noindex={true}>
+  <section class="nf">
+    <div class="wrap">
+      <p class="label nf__code">404</p>
+      <h1 class="nf__title">This page doesn't exist.</h1>
+      <p class="lead nf__lead">
+        The link may be out of date. Everything current is one step away.
+      </p>
+      <div class="nf__actions">
+        <a class="btn" href="/">Go home</a>
+        <a class="btn btn--ghost" href="/#work">Selected work</a>
+        <a class="btn btn--ghost" href="/writing">Writing</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    padding-block: clamp(5rem, 12vw, 9rem);
+  }
+
+  .nf__code {
+    color: var(--accent);
+  }
+
+  .nf__title {
+    font-size: clamp(2.25rem, 1.7rem + 2.6vw, 3.75rem);
+    margin-block: 1rem 1.25rem;
+  }
+
+  .nf__lead {
+    max-width: 46ch;
+  }
+
+  .nf__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2.25rem;
+  }
+</style>
