@@ -1,85 +1,72 @@
 # Artem Tarasov — Portfolio
 
-![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
-![No build step](https://img.shields.io/badge/Build%20step-none-2ea44f)
-![Bilingual](https://img.shields.io/badge/i18n-RU%20%2F%20EN-blueviolet)
+`HTML` `CSS` `JavaScript` — no framework, no build step, no dependencies
 
-**Task:** a personal site that positions Artem at the intersection of SEO, web
-development and AI product building — something that reads as a founder/specialist
-portfolio, not a generic template, and works fully offline with zero build tooling.
+My own site. I write SEO, build sites, and I'm working on an AI startup (AIRA),
+and I wanted a portfolio that actually reads that way instead of looking like
+every other "Hi, I'm a developer" template. Also I wanted it to open by just
+double-clicking `index.html` — no `npm install`, no build pipeline, nothing to
+break six months from now when I haven't touched it.
 
-**Result:** a single-page, bilingual (RU/EN) portfolio — hero, skills, case studies,
-gallery, an interactive career timeline and a print-ready résumé (`Ctrl+P` renders a
-clean CV via dedicated print styles) — built with vanilla HTML/CSS/JS so it opens by
-double-clicking `index.html`, no `npm install` required.
+It's bilingual (RU/EN, toggle in the header) because half the people who look at
+this are Russian-speaking clients and half aren't. Hero, skills as a bento grid,
+case studies, a photo gallery, a timeline of how I actually got here, and a
+résumé you can download as a clean PDF straight from the page (`Ctrl+P`, there's
+dedicated print CSS for it).
 
----
+## Running it
 
-## Live
+Just open `index.html`. That's it. For a real deploy, any static host works —
+Netlify, Vercel, GitHub Pages, doesn't matter, there's no build command.
 
-Open `index.html` directly in a browser, or serve the folder with any static host
-(Netlify, Vercel, GitHub Pages — no build command needed).
+## How it's put together
 
-## Stack
-
-- **Vanilla HTML + CSS + JavaScript** — no framework, no bundler, no dependencies
-- CSS custom properties for theming (warm dark palette, soft shadows, no harsh
-  animation), bento-style grid layout, glassmorphism accents, `prefers-reduced-motion`
-  support
-- All copy lives in editable JS data arrays (`script.js`) — content, including the
-  RU/EN language switch, is data-driven rather than hardcoded into markup
-- `window.print()` + `@media print` styles double as a one-click PDF résumé generator
-
-## Structure
+Everything — every string of copy, in both languages — lives in JS data arrays
+at the top of `script.js`, not scattered through the HTML. So updating the site
+is editing an object, not hunting through markup. The rest is CSS custom
+properties for a warm dark palette (I deliberately kept the shadows soft and
+skipped the flashy infinite-loop animations — didn't want it to feel like a
+template), a bento-style grid for the skills section, and an
+`IntersectionObserver` for the scroll reveals.
 
 ```
-index.html     semantic markup for every section (hero, about, skills, projects,
-               gallery, cases, experience timeline, numbers, services, contact)
-styles.css     design tokens, layout, responsive rules, print stylesheet
-script.js      content data (T / DATA objects), card renderers, i18n switch,
-               portfolio filter, scroll-reveal (IntersectionObserver), form
-               validation, burger menu
-images/        photo, case-study and gallery assets
-manifest.json  PWA manifest (installable, standalone display)
+index.html     markup for every section
+styles.css     design tokens, layout, the print stylesheet for the résumé
+script.js      all copy (T / DATA objects), card rendering, language switch,
+               portfolio filtering, scroll-reveal, form validation, burger menu
+images/        photos + case study screenshots
+manifest.json  PWA manifest
 ```
 
-## Sections
+## Known TODO
 
-Hero · About · Skills (bento grid) · Projects · Gallery · Case studies (with
-discussion CTAs) · Experience timeline ("My Journey") · Key numbers · Services ·
-Contact.
-
-## Notes
-
-- Bilingual by design — every string routes through the `T` i18n object in
-  `script.js`, so adding a language means adding one more key set, not rewriting
-  markup.
-- The contact form currently simulates submission; wiring it to a real endpoint
-  (Formspree or similar) is a one-line swap noted in `initContactForm()`.
+The contact form currently fakes a submit (there's a comment right where the
+real fetch call needs to go in `initContactForm()`) — haven't wired it to
+Formspree yet.
 
 ---
 
 ## Русская версия
 
-**Что это:** личный сайт-портфолио, который позиционирует Артёма на стыке SEO,
-веб-разработки и AI-продуктов — не шаблон, а полноценная витрина специалиста и
-фаундера. Открывается двойным кликом по `index.html`, без сборки и установки
-зависимостей.
+Мой личный сайт. Занимаюсь SEO, веб-разработкой и AI-стартапом (AIRA), и
+хотелось портфолио, которое это реально показывает, а не выглядит как очередной
+шаблон «Привет, я разработчик». И чтобы открывался просто двойным кликом по
+`index.html` — без сборки, без `npm install`, без риска что через полгода что-то
+сломается, потому что я забыл, как это собирать.
 
-**Задача:** собрать двуязычный (RU/EN) лендинг-визитку с кейсами, галереей,
-интерактивной лентой карьерного пути и резюме, которое можно скачать в PDF одной
-кнопкой (`Ctrl+P` → чистая печатная вёрстка).
+Двуязычный (RU/EN, переключатель в шапке), потому что часть людей, которые сюда
+заходят — русскоязычные клиенты, часть нет. Хиро, навыки в виде bento-сетки,
+кейсы, галерея, таймлайн того, как я вообще к этому пришёл, и резюме, которое
+скачивается чистым PDF прямо со страницы (`Ctrl+P`, под это отдельная печатная
+вёрстка).
 
-**Стек:** чистый HTML + CSS + JavaScript, без фреймворков и сборщика — весь
-контент (включая переключение языка) вынесен в редактируемые JS-объекты
-(`script.js`), поэтому обновление текста не требует правок вёрстки.
+**Стек:** чистые HTML/CSS/JS, без фреймворка и сборщика. Весь текст (на обоих
+языках) — в JS-объектах в начале `script.js`, а не размазан по вёрстке, так что
+обновлять контент — это редактировать объект, а не искать по разметке.
 
-**Результат:** одностраничный сайт-визитка с bento-сеткой навыков, кейсами,
-галереей, таймлайном опыта и скачиваемым резюме — готов к деплою на любой
-статический хостинг (Netlify, Vercel, GitHub Pages) без команды сборки.
+**Запуск:** просто открой `index.html`. Для деплоя — любой статический хостинг,
+команда сборки не нужна.
 
-**Структура:** `index.html` — разметка всех секций, `styles.css` — дизайн-токены
-и адаптив, `script.js` — контент, рендер карточек, i18n, фильтр портфолио,
-scroll-reveal и валидация формы, `images/` — фото и графика кейсов.
+**Не доделано:** форма обратной связи пока имитирует отправку — реальный fetch
+на Formspree ещё не подключил (место отмечено комментарием в
+`initContactForm()`).
