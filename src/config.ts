@@ -6,7 +6,7 @@ export const SITE = {
     'I work at the intersection of growth, AI and software. I build automation systems, AI-powered workflows and digital products.',
   url: 'https://tarasov-artem.netlify.app',
   locale: 'en',
-  location: 'Based in Moscow · Working internationally',
+  location: 'Based in Phuket · Working internationally',
 };
 
 /**
