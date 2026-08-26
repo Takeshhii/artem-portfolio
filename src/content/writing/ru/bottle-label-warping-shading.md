@@ -14,6 +14,44 @@ Bottle Label Studio берёт плоский макет этикетки и ф�
 Реалистичность почти целиком держится на двух приёмах. Оба несложные, и оба легко сделать
 чуть-чуть неправильно.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 320" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Even label columns versus columns compressed toward the silhouette</title>
+  <text x="72" y="44" font-size="13" fill="currentColor" opacity="0.75">flat artwork, even columns</text>
+    <line x1="72.0" y1="60" x2="72.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="120.0" y1="60" x2="120.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="168.0" y1="60" x2="168.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="216.0" y1="60" x2="216.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="264.0" y1="60" x2="264.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="312.0" y1="60" x2="312.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="360.0" y1="60" x2="360.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="408.0" y1="60" x2="408.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="456.0" y1="60" x2="456.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="504.0" y1="60" x2="504.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="552.0" y1="60" x2="552.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="600.0" y1="60" x2="600.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+    <line x1="648.0" y1="60" x2="648.0" y2="130" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+  <rect x="72" y="60" width="576" height="70" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+  <text x="72" y="180" font-size="13" fill="var(--accent)" opacity="0.95">after the cylindrical remap, same columns compressed toward the edges</text>
+    <line x1="72.0" y1="196" x2="72.0" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="100.0" y1="196" x2="100.0" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="138.3" y1="196" x2="138.3" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="185.5" y1="196" x2="185.5" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="239.7" y1="196" x2="239.7" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="298.6" y1="196" x2="298.6" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="360.0" y1="196" x2="360.0" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="421.4" y1="196" x2="421.4" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="480.3" y1="196" x2="480.3" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="534.5" y1="196" x2="534.5" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="581.7" y1="196" x2="581.7" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="620.0" y1="196" x2="620.0" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+    <line x1="648.0" y1="196" x2="648.0" y2="266" stroke="var(--accent)" stroke-width="1.2" opacity="0.85"/>
+  <rect x="72" y="196" width="576" height="70" fill="none" stroke="var(--accent)" stroke-width="1.4" opacity="0.8"/>
+  <text x="360" y="298" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.65" font-family="ui-monospace, monospace">uCurved = 0.5 + sin(theta) / (2 * sin(arc/2))</text>
+</svg>
+<figcaption>Те же двенадцать столбцов до и после развёртки. Внутренние расходятся, крайние сбиваются — именно это читается как «обёрнуто».</figcaption>
+</figure>
+
 ## Проблема первая: плоский прямоугольник не оборачивается
 
 Если просто растянуть этикетку по четырём углам, она выглядит наклеенной — стикер, а не

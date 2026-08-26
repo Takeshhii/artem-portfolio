@@ -20,6 +20,37 @@ parts":
 
 Both halves matter. Repetition alone isn't enough.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 440" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Two axes: how much judgment a task needs, and what a mistake costs</title>
+  <defs>
+    <marker id="ar-m" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <rect x="72" y="40" width="300" height="300" fill="var(--accent-teal)" opacity="0.10"/>
+  <text x="222" y="196" text-anchor="middle" font-size="15" fill="var(--accent-teal)" font-weight="600">SAFE TO AUTOMATE</text>
+  <text x="222" y="218" text-anchor="middle" font-size="13" fill="currentColor" opacity="0.65">low judgment, cheap visible errors</text>
+  <rect x="372" y="40" width="276" height="300" fill="var(--accent-rose)" opacity="0.13"/>
+  <text x="510" y="196" text-anchor="middle" font-size="15" fill="var(--accent-rose)" font-weight="600">KEEP MANUAL</text>
+  <text x="510" y="218" text-anchor="middle" font-size="13" fill="currentColor" opacity="0.65">judgment, or expensive to reverse</text>
+  <line x1="72" y1="340" x2="660" y2="340" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar-m)"/>
+  <line x1="72" y1="340" x2="72" y2="32" stroke="currentColor" stroke-width="1.5" marker-end="url(#ar-m)"/>
+  <text x="366" y="378" text-anchor="middle" font-size="13" fill="currentColor" opacity="0.75">cost of a mistake, and how visible it is</text>
+  <text x="-190" y="26" transform="rotate(-90)" text-anchor="middle" font-size="13" fill="currentColor" opacity="0.75">judgment required</text>
+  <g font-size="13" fill="currentColor">
+    <circle cx="140" cy="300" r="4" fill="var(--accent-teal)"/><text x="152" y="304">crawls and diffs</text>
+    <circle cx="150" cy="262" r="4" fill="var(--accent-teal)"/><text x="162" y="266">reporting</text>
+    <circle cx="196" cy="120" r="4" fill="var(--accent-teal)"/><text x="208" y="124">schema from CMS fields</text>
+    <circle cx="300" cy="86" r="4" fill="var(--accent)"/><text x="312" y="90">draft generation (gated)</text>
+    <circle cx="470" cy="290" r="4" fill="var(--accent-rose)"/><text x="482" y="294">redirects</text>
+    <circle cx="520" cy="150" r="4" fill="var(--accent-rose)"/><text x="532" y="154">canonicals, indexing</text>
+    <circle cx="560" cy="86" r="4" fill="var(--accent-rose)"/><text x="572" y="90">what to publish</text>
+  </g>
+</svg>
+<figcaption>The two axes. Automation is safe in the lower-left corner and gets dangerous fast in either direction.</figcaption>
+</figure>
+
 ## The two-axis test
 
 Before automating a task, I put it on two axes.

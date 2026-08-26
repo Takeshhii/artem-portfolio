@@ -20,6 +20,41 @@ type Check = (visitor: Visitor, rule: Rule, station: StationState) => Violation 
 
 Эта сигнатура — и есть бо́льшая часть архитектуры.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 330" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>What the rule engine reads, and the one field it never reads</title>
+  <rect x="238" y="86" width="244" height="150" rx="10" fill="var(--accent)" fill-opacity="0.09" stroke="var(--accent)" stroke-width="1.6"/>
+  <text x="360" y="122" text-anchor="middle" font-size="15" font-weight="700" fill="var(--accent)">RuleEngine</text>
+  <text x="360" y="146" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.72">pure functions</text>
+  <text x="360" y="165" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.72">no DOM, no audio</text>
+  <text x="360" y="184" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.72">no module state</text>
+  <text x="360" y="212" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.9" font-family="ui-monospace, monospace">Violation | null</text>
+  <g font-size="13" fill="currentColor">
+    <text x="24" y="106">visitor.claim</text>
+    <text x="24" y="140">rules (data)</text>
+    <text x="24" y="174">station roster</text>
+    <text x="24" y="208">dive log</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1.3" opacity="0.7">
+    <line x1="150" y1="101" x2="232" y2="120"/>
+    <line x1="140" y1="135" x2="232" y2="146"/>
+    <line x1="152" y1="169" x2="232" y2="172"/>
+    <line x1="120" y1="203" x2="232" y2="198"/>
+  </g>
+  <g>
+    <text x="556" y="140" font-size="13" fill="var(--accent-rose)" font-weight="600">visitor.truth</text>
+    <text x="556" y="162" font-size="12" fill="currentColor" opacity="0.7">never read</text>
+    <text x="556" y="180" font-size="12" fill="currentColor" opacity="0.7">never rendered</text>
+    <line x1="488" y1="150" x2="546" y2="140" stroke="var(--accent-rose)" stroke-width="1.4" stroke-dasharray="5 4"/>
+    <line x1="508" y1="132" x2="528" y2="158" stroke="var(--accent-rose)" stroke-width="2"/>
+    <line x1="528" y1="132" x2="508" y2="158" stroke="var(--accent-rose)" stroke-width="2"/>
+  </g>
+  <text x="360" y="288" text-anchor="middle" font-size="12.5" fill="currentColor" opacity="0.72">The engine can prove a document is inconsistent.</text>
+  <text x="360" y="308" text-anchor="middle" font-size="12.5" fill="currentColor" opacity="0.72">It can never tell you whether the thing at the airlock is a person.</text>
+</svg>
+<figcaption>Всё, что движок читает, и одно поле, которое он не читает. Именно это умолчание оставляет суждение игроку.</figcaption>
+</figure>
+
 ## Нормы — данные, проверки — функции
 
 У каждой нормы в `rules.json` есть id, текст для игрока, тип проверки и параметры. Движок

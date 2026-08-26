@@ -3,42 +3,62 @@
 @import '@fontsource-variable/jetbrains-mono';
 
 /* ---------------------------------------------------------------------------
-   Design tokens. Warm off-white base, near-black ink, one restrained bronze
-   accent. Dark sections invert the same scale rather than introducing a
-   second palette.
+   Design tokens — nacre. A cool pearl-white base and near-black ink carrying a
+   faint violet bias, so the accents read as part of the same material rather
+   than applied on top of a neutral grey.
+
+   The iridescence is one gradient (rose -> iris -> teal) reused at low opacity.
+   It is a sheen, not a colour scheme: nothing structural depends on it, and
+   every text colour is a flat token that passes contrast on its own.
    ------------------------------------------------------------------------ */
 :root {
-  --bg: #fbfaf8;
-  --surface: #f4f1ec;
-  --surface-2: #ece7df;
-  --ink: #15171c;
-  --ink-soft: #3c4149;
-  --muted: #6b7078;
-  --line: #e3ddd3;
-  --accent: #a6532a;
-  --accent-soft: #c47a4a;
+  --bg: #f8f7fa;
+  --surface: #f1eff5;
+  --surface-2: #e9e6ef;
+  --ink: #17161d;
+  --ink-soft: #3f3d4a;
+  --muted: #6f6c7d;
+  --line: #e4e0ea;
 
-  --dark-bg: #14161a;
-  --dark-surface: #1b1e24;
-  --dark-ink: #f5f2ed;
-  --dark-muted: #9aa0a8;
-  --dark-line: #2a2e36;
+  /* Iris violet, dark enough to carry body-size text on --bg (~5:1). */
+  --accent: #6f5fa6;
+  --accent-soft: #9b8dc4;
+  --accent-teal: #4f8fa6;
+  --accent-rose: #c0839c;
+
+  --nacre: linear-gradient(
+    115deg,
+    var(--accent-rose) 0%,
+    var(--accent-soft) 34%,
+    var(--accent) 62%,
+    var(--accent-teal) 100%
+  );
+
+  --dark-bg: #14131a;
+  --dark-surface: #1c1a24;
+  --dark-ink: #f4f1f7;
+  --dark-muted: #9a95a8;
+  --dark-line: #2b2834;
 
   --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
   --font-sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
 
   --wrap: 1180px;
-  --wrap-narrow: 720px;
+  /* Long-form measure: ~78 characters at the article body size. */
+  --wrap-narrow: 800px;
   --radius: 14px;
   --radius-lg: 20px;
 
   --step-label: 0.75rem;
   --step-body: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-read: clamp(1.0625rem, 1.02rem + 0.2vw, 1.1875rem);
   --step-lead: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
   --step-h3: clamp(1.25rem, 1.15rem + 0.45vw, 1.5rem);
   --step-h2: clamp(2rem, 1.6rem + 1.8vw, 3.25rem);
   --step-h1: clamp(2.75rem, 1.9rem + 3.6vw, 5.25rem);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 *,
@@ -336,4 +356,110 @@ img {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+
+/* ---------------------------------------------------------------------------
+   Nacre surface treatments
+
+   Two effects, both decorative and both safe to lose: a slow iridescent drift
+   across large surfaces, and a sheen that sweeps a border or rule on hover.
+   Everything here sits behind content via ::before, so it can never affect
+   legibility, and all of it stops under reduced-motion.
+   ------------------------------------------------------------------------ */
+@keyframes nacre-drift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes nacre-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* A hairline rule that carries the full iridescent sweep. */
+.nacre-rule {
+  height: 1px;
+  border: 0;
+  margin: 0;
+  background: var(--nacre);
+  background-size: 300% 100%;
+  animation: nacre-drift 18s ease-in-out infinite;
+  opacity: 0.55;
+}
+
+/* Large tinted field — used behind the hero and the writing index head. */
+.nacre-field {
+  position: relative;
+  isolation: isolate;
+}
+
+.nacre-field::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--nacre);
+  background-size: 220% 220%;
+  opacity: 0.07;
+  animation: nacre-drift 26s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.dark .nacre-field::before {
+  opacity: 0.13;
+}
+
+/* Text that picks up the sheen. Falls back to a flat accent where
+   background-clip: text is unsupported. */
+.nacre-text {
+  color: var(--accent);
+}
+
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .nacre-text {
+    background: var(--nacre);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: nacre-drift 14s ease-in-out infinite;
+  }
+}
+
+/* Page-load entrance for the first screen, staggered by --i. */
+.rise {
+  animation: nacre-rise 0.75s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+/* Cards and rows lift slightly and warm their border on hover. */
+.lift {
+  transition: transform 0.32s var(--ease-out), border-color 0.32s ease,
+    box-shadow 0.32s ease;
+}
+
+.lift:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 42%, transparent);
+  box-shadow: 0 14px 34px -22px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nacre-rule,
+  .nacre-field::before,
+  .nacre-text,
+  .rise {
+    animation: none;
+  }
+
+  .rise {
+    opacity: 1;
+    transform: none;
+  }
+
+  .lift:hover {
+    transform: none;
+  }
 }

@@ -1,0 +1,75 @@
+---
+import Work from '../../layouts/Work.astro';
+---
+
+<Work
+  title="Conversion Collective"
+  category="Web · Conversion · Analytics"
+  summary="A single-page site for a B2B revenue consultancy, built to convert visitors into booked calls rather than to present information — with every editable string living in one place."
+  description="Conversion Collective — a dark editorial single-page site for a B2B sales-systems consultancy, structured around one booking flow, with content held in a single data object."
+  year="2026"
+  role="Design and full build, end to end"
+  status="Live, in production"
+  stack={['HTML', 'CSS', 'Vanilla JS', 'Analytics']}
+  links={[
+    { label: 'Visit convertcollective.com', href: 'https://convertcollective.com' },
+    { label: 'View on GitHub', href: 'https://github.com/Takeshhii/conversion-collective' },
+  ]}
+>
+  <h2>Context</h2>
+  <p>
+    Conversion Collective is a Los Angeles based consultancy working on sales
+    systems and revenue for B2B companies. The client is my sister. The site needed
+    to read as premium and credible to founders and revenue leaders rather than as
+    a generic consultant template, and it needed to drive one specific action:
+    booking a free sales audit.
+  </p>
+
+  <h2>The approach</h2>
+  <p>
+    A dark editorial single-page site — the visual direction we settled on was
+    "McKinsey meets Vogue" — built around a single conversion path: hero, the
+    problem she solves, proof through stats and client logos and testimonials, the
+    offer, then booking. The actual call-to-action lives on its own
+    <code>lets-work.html</code> page so the booking flow isn't competing with the
+    rest of the argument.
+  </p>
+
+  <h2>The decision worth explaining</h2>
+  <p>
+    Every editable piece of copy — navigation, stats, client logos, services,
+    process steps, the founding-client offer, testimonials, FAQ — lives in a single
+    <code>siteData</code> object in <code>script.js</code>. Updating a price or
+    swapping a testimonial is editing a JavaScript object, not hunting through
+    markup.
+  </p>
+  <p>
+    The exception is deliberate: hero copy, the problem statement and the about
+    text stay as prose directly in <code>index.html</code>, because that content
+    benefits from being read and edited in context rather than abstracted into
+    data. The rule I applied was roughly — if it's a list of things, it's data; if
+    it's an argument, it's prose.
+  </p>
+
+  <h2>Technical notes</h2>
+  <p>
+    No framework and no build step. Fluid type through <code>clamp()</code>,
+    mobile-first CSS, and dark and light section theming driven by custom
+    properties rather than separate stylesheets.
+  </p>
+  <p>
+    Google Analytics, Yandex Metrica and Search Console are wired in from the
+    start. The site's job is to convert and be measurable, not only to look good —
+    and a conversion-focused page with no instrumentation is an assertion rather
+    than a result.
+  </p>
+
+  <h2>My role</h2>
+  <p>
+    Design and full build, end to end — content structure, visual direction and
+    implementation.
+  </p>
+
+  <h2>Status</h2>
+  <p>Live at convertcollective.com.</p>
+</Work>

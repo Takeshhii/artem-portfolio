@@ -1,0 +1,56 @@
+---
+import Work from '../../layouts/Work.astro';
+---
+
+<Work
+  title="kanban-board"
+  category="React · State · Early work"
+  summary="A task board with four workflow columns, per-task routing and local persistence. The project where component decomposition and lifted state stopped being theory."
+  description="kanban-board — an early React task board with routing per task and local persistence. Student work from 2023, kept public."
+  year="2023"
+  role="Sole author"
+  status="Archived — kept public as part of the trajectory"
+  stack={['React', 'JavaScript', 'React Router', 'localStorage']}
+  links={[{ label: 'View on GitHub', href: 'https://github.com/Takeshhii/kanban-board' }]}
+>
+  <h2>Context</h2>
+  <p>
+    Student work from 2023, kept public alongside
+    <a href="/work/bike-theft-tracker">bike-theft-tracker</a> as the honest start
+    of the trajectory.
+  </p>
+
+  <h2>What it does</h2>
+  <p>
+    A task board with four workflow columns. Tasks move between columns, each task
+    has its own route so a specific card can be linked to directly, and the board
+    survives a page reload through local persistence.
+  </p>
+
+  <h2>What I learned from it</h2>
+  <p>
+    This is the project where a few React ideas stopped being things I had read
+    about:
+  </p>
+  <ul>
+    <li>
+      <strong>Where state lives determines your component tree.</strong> I started
+      by putting state wherever it was convenient and ended up with props threaded
+      through components that did not care about them. Lifting state to the lowest
+      common ancestor is a rule that only makes sense after you have violated it.
+    </li>
+    <li>
+      <strong>Routing per task changes the data model.</strong> Once a task has a
+      URL, it needs a stable identity, and the board can no longer be an array you
+      reorder freely. That constraint arrived late and forced a rewrite.
+    </li>
+    <li>
+      <strong>Persistence exposes every assumption.</strong> Serialising to
+      localStorage immediately surfaced state that was not actually serialisable,
+      and state that should never have been stored at all.
+    </li>
+  </ul>
+
+  <h2>Status</h2>
+  <p>Archived.</p>
+</Work>

@@ -1,0 +1,78 @@
+---
+import Work from '../../layouts/Work.astro';
+---
+
+<Work
+  title="ZHIVA"
+  category="E-commerce · Growth · Search"
+  summary="Organic search and content for a live Shopify jewellery business — collection architecture built around demand rather than admin convenience, and the platform's built-in duplication brought under control."
+  description="Organic growth and SEO architecture for ZHIVA, a Shopify jewellery business: collection structure, faceted URL control and product-page consistency."
+  year="2025 — now"
+  role="Organic growth, SEO architecture and content"
+  status="Live, ongoing"
+  stack={['Shopify', 'Liquid', 'Technical SEO', 'Content']}
+  links={[{ label: 'Visit zhivajewelry.com', href: 'https://zhivajewelry.com' }]}
+>
+  <h2>Context</h2>
+  <p>
+    ZHIVA is a working jewellery business on Shopify. I handle organic search:
+    the architecture of collections and products, the technical layer underneath
+    them, and the content that has to rank.
+  </p>
+
+  <h2>The problem</h2>
+  <p>
+    Shopify is a good platform to sell on and an opinionated one to do search work
+    on. Several structural decisions are baked in, produce duplication by default,
+    and cannot be configured away.
+  </p>
+  <p>
+    A product is reachable at both <code>/products/handle</code> and
+    <code>/collections/x/products/handle</code>. Filter and sort parameters each
+    generate a crawlable URL, so colour, material, price band and sort order
+    multiply into combinations that all serve subsets of the same products.
+    Paginated collection pages repeat the title, description and intro copy of page
+    one. None of it is a bug; it is what generality looks like from the inside.
+  </p>
+
+  <h2>The approach</h2>
+  <p>
+    Three decisions did most of the work.
+  </p>
+  <p>
+    <strong>Internal links point at the canonical form.</strong> Collection cards
+    link to <code>/products/</code> directly rather than the long path. Shopify
+    already canonicalises, but the default templates meant the site was largely
+    linking to URLs that get canonicalised away — one unnecessary hop on every
+    internal path, and analytics split across several page paths per product.
+  </p>
+  <p>
+    <strong>Filtered URLs have to earn indexation.</strong> Non-indexable by
+    default, indexable by exception — and only where a filter matches genuine
+    search demand. A material filter can deserve a real landing page; a sort order
+    never does.
+  </p>
+  <p>
+    <strong>Collections map to demand, not to merchandising convenience.</strong>
+    Someone searching a category is looking for a collection page, not a product.
+    A collection that exists only because it was convenient to group those items in
+    admin is an internal tool, not a landing page — and two collections sharing
+    overlapping products with nothing on them but the grid are near-identical
+    documents competing for related queries.
+  </p>
+
+  <h2>My role</h2>
+  <p>
+    Search architecture and organic growth across products and collections,
+    including the content that sits on collection pages and the technical
+    decisions about what gets crawled and indexed.
+  </p>
+
+  <h2>Status</h2>
+  <p>Live and ongoing.</p>
+  <p>
+    The general version of this is written up in
+    <a href="/writing/shopify-seo-architecture">Shopify SEO: the duplication
+    problems that are built into the platform</a>.
+  </p>
+</Work>

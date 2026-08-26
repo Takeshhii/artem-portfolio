@@ -32,36 +32,36 @@ const projects = [
     title: 'ZHIVA',
     meta: 'E-commerce · Growth · SEO · Shopify',
     body: 'Live Shopify jewelry business where I work on organic search, SEO architecture and content across products and collections.',
-    href: 'https://zhivajewelry.com',
-    external: true,
+    href: '/work/zhiva',
+    external: false,
   },
   {
     title: 'Conversion Collective',
     meta: 'Web · Conversion · Analytics',
     body: 'Live site for a B2B revenue and sales-systems consultancy, structured around a single primary acquisition and booking flow.',
-    href: 'https://convertcollective.com',
-    external: true,
+    href: '/work/conversion-collective',
+    external: false,
   },
   {
     title: 'ШЛЮЗ',
     meta: 'TypeScript · Vite · Web Audio · Game',
     body: 'Browser horror game about checking documents at an airlock 340 meters down. Six shifts, four endings, all audio synthesized live at runtime. Interface is in Russian.',
-    href: 'https://dulcet-gnome-4fb2f6.netlify.app/',
-    external: true,
+    href: '/work/shlyuz',
+    external: false,
   },
   {
     title: 'bike-theft-tracker',
     meta: 'React · REST API · Auth · 2023',
     body: 'SPA for logging bike-theft cases with JWT authentication and role-based access. First project I built against a real authenticated API.',
-    href: 'https://github.com/Takeshhii/bike-theft-tracker',
-    external: true,
+    href: '/work/bike-theft-tracker',
+    external: false,
   },
   {
     title: 'kanban-board',
     meta: 'React · Routing · State · 2023',
     body: 'Task board with four workflow columns, per-task routing and local persistence. Where component decomposition and lifted state clicked for me.',
-    href: 'https://github.com/Takeshhii/kanban-board',
-    external: true,
+    href: '/work/kanban-board',
+    external: false,
   },
 ];
 
@@ -117,26 +117,27 @@ const schema = [
 
 <Base schema={schema}>
   <!-- ================= Hero ================= -->
-  <section class="hero">
+  <section class="hero nacre-field">
     <div class="wrap">
-      <p class="label hero__eyebrow">AI · Growth · Automation · Product</p>
+      <p class="label hero__eyebrow nacre-text rise">AI · Growth · Automation · Product</p>
 
-      <h1 class="hero__title">
+      <h1 class="hero__title rise" style="--i:1">
         I build AI-powered growth systems and digital products.
       </h1>
 
-      <p class="lead hero__lead">
+      <p class="lead hero__lead rise" style="--i:2">
         My background is in SEO and digital growth. Today I build automation systems,
         AI-powered workflows and products that turn repetitive growth work into
         systems that keep running on their own.
       </p>
 
-      <div class="hero__actions">
+      <div class="hero__actions rise" style="--i:3">
         <a class="btn" href="#work">View selected work</a>
         <a class="btn btn--ghost" href={LINKS.github} target="_blank" rel="noopener">GitHub</a>
       </div>
 
-      <p class="label hero__status">{SITE.location}</p>
+      <hr class="nacre-rule hero__rule" />
+      <p class="label hero__status rise" style="--i:4">{SITE.location}</p>
     </div>
   </section>
 
@@ -269,7 +270,7 @@ const schema = [
         {
           projects.map((p) => (
             <a
-              class="card reveal"
+              class="card reveal lift"
               href={p.href}
               target={p.external ? '_blank' : undefined}
               rel={p.external ? 'noopener' : undefined}
@@ -297,7 +298,7 @@ const schema = [
         {
           articles.slice(0, 6).map((post) => (
             <li>
-              <a class="post" href={urlOf(post)}>
+              <a class="post lift" href={urlOf(post)}>
                 <span class="post__title">{post.data.title}</span>
                 <span class="post__meta label">
                   {post.data.category} ·{' '}
@@ -322,6 +323,15 @@ const schema = [
         <div class="section-head">
           <h2>About</h2>
         </div>
+        <img
+          class="about__portrait"
+          src="/images/artem-small.webp"
+          width="112"
+          height="112"
+          alt="Artem Tarasov, portrait against the sea"
+          loading="lazy"
+          decoding="async"
+        />
         <p class="lead">
           I'm Artem Tarasov, studying Business Informatics and working with commercial
           projects alongside it.
@@ -468,6 +478,21 @@ const schema = [
   .card:hover .card__arrow {
     color: var(--accent);
     transform: translateX(3px);
+  }
+
+  .hero__rule {
+    margin-top: 2.5rem;
+    max-width: 340px;
+  }
+
+  .about__portrait {
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 14px 32px -22px color-mix(in srgb, var(--accent) 70%, transparent);
   }
 
   /* ---------------- Writing ---------------- */

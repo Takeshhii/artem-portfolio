@@ -16,6 +16,46 @@ translationKey: 'llm-content-pipeline-wordpress'
 запроса к API — а про всё то, что пришлось построить вокруг него, прежде чем этим
 стало можно пользоваться.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 300" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Pipeline stages: briefs, generation, validation, queue, publish</title>
+  <defs>
+    <marker id="ar-p" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g font-size="13">
+    <rect x="8" y="60" width="118" height="58" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+    <text x="67" y="85" text-anchor="middle" fill="currentColor" font-weight="600">Briefs</text>
+    <text x="67" y="103" text-anchor="middle" fill="currentColor" opacity="0.6" font-size="11">written by hand</text>
+    <rect x="156" y="60" width="118" height="58" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+    <text x="215" y="85" text-anchor="middle" fill="currentColor" font-weight="600">Generate</text>
+    <text x="215" y="103" text-anchor="middle" fill="currentColor" opacity="0.6" font-size="11">LLM</text>
+    <rect x="304" y="52" width="126" height="74" rx="8" fill="var(--accent)" fill-opacity="0.10" stroke="var(--accent)" stroke-width="1.6"/>
+    <text x="367" y="80" text-anchor="middle" fill="var(--accent)" font-weight="700">Validate</text>
+    <text x="367" y="98" text-anchor="middle" fill="currentColor" opacity="0.7" font-size="11">structure, de-dup</text>
+    <text x="367" y="113" text-anchor="middle" fill="currentColor" opacity="0.7" font-size="11">link sanity</text>
+    <rect x="460" y="60" width="118" height="58" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+    <text x="519" y="85" text-anchor="middle" fill="currentColor" font-weight="600">Queue</text>
+    <text x="519" y="103" text-anchor="middle" fill="currentColor" opacity="0.6" font-size="11">paced slots</text>
+    <rect x="608" y="60" width="104" height="58" rx="8" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+    <text x="660" y="85" text-anchor="middle" fill="currentColor" font-weight="600">Publish</text>
+    <text x="660" y="103" text-anchor="middle" fill="currentColor" opacity="0.6" font-size="11">WP REST</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1.4" marker-end="url(#ar-p)" opacity="0.8">
+    <line x1="126" y1="89" x2="150" y2="89"/>
+    <line x1="274" y1="89" x2="298" y2="89"/>
+    <line x1="430" y1="89" x2="454" y2="89"/>
+    <line x1="578" y1="89" x2="602" y2="89"/>
+  </g>
+  <path d="M367 126 L367 180 L215 180 L215 124" fill="none" stroke="var(--accent-rose)" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ar-p)" opacity="0.9"/>
+  <text x="291" y="199" text-anchor="middle" font-size="12" fill="var(--accent-rose)">rejected, with the reason attached</text>
+  <path d="M519 126 L519 232 L60 232" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="4 4" opacity="0.45"/>
+  <text x="300" y="251" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.6">the queue is the last cheap place for a human to step in</text>
+</svg>
+<figcaption>Этапы. Ценность несёт валидация: отбракованный черновик возвращается с указанием причины.</figcaption>
+</figure>
+
 ## Генерация — наименее интересная часть
 
 Наивная версия такого проекта — скрипт, который берёт ключевое слово и просит модель

@@ -31,10 +31,10 @@ const schema = {
   alternates={alternates}
   schema={schema}
 >
-  <section class="head">
+  <section class="head nacre-field">
     <div class="wrap">
-      <p class="label">{s.writing.label}</p>
-      <h1 class="head__title">{s.writing.title}</h1>
+      <p class="label nacre-text rise">{s.writing.label}</p>
+      <h1 class="head__title rise" style="--i:1">{s.writing.title}</h1>
       <p class="lead head__lead">{s.writing.lead}</p>
     </div>
   </section>
@@ -46,7 +46,7 @@ const schema = {
           <ul class="list">
             {posts.map((post) => (
               <li>
-                <a class="entry" href={urlOf(post)}>
+                <a class="entry lift" href={urlOf(post)}>
                   <div class="entry__main">
                     <h2 class="entry__title">{post.data.title}</h2>
                     <p class="entry__excerpt">{post.data.excerpt}</p>

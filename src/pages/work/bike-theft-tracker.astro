@@ -1,0 +1,60 @@
+---
+import Work from '../../layouts/Work.astro';
+---
+
+<Work
+  title="bike-theft-tracker"
+  category="React · Auth · Early work"
+  summary="A single-page app for logging bike-theft cases, with JWT authentication and role-based access. The first thing I built against a real authenticated API rather than a mock."
+  description="bike-theft-tracker — an early React SPA with JWT authentication, role-based access and REST API integration. Student work from 2023, kept public."
+  year="2023"
+  role="Sole author"
+  status="Archived — kept public as part of the trajectory"
+  stack={['React', 'JavaScript', 'REST API', 'JWT']}
+  links={[{ label: 'View on GitHub', href: 'https://github.com/Takeshhii/bike-theft-tracker' }]}
+>
+  <h2>Context</h2>
+  <p>
+    This is early work — a student project from 2023, before any of the commercial
+    SEO or automation work. I keep it public deliberately. The trajectory matters
+    more than pretending it started polished.
+  </p>
+
+  <h2>What it does</h2>
+  <p>
+    An application for logging and tracking bike-theft cases: report a theft, list
+    and filter existing cases, and update their status. Different roles see
+    different things, which is where the interesting part was.
+  </p>
+
+  <h2>What I learned from it</h2>
+  <p>
+    This was the first project where I worked against a real authenticated API
+    instead of local state or a mock. Three things landed here that I have used
+    ever since:
+  </p>
+  <ul>
+    <li>
+      <strong>Auth is a state problem, not a screen.</strong> The login form was
+      the easy half. Holding a token, refreshing it, deciding what the UI does
+      while auth is unresolved, and handling the request that fails <em>because</em>
+      the token expired mid-session — that is where the actual work was.
+    </li>
+    <li>
+      <strong>Role-based access has to exist on both sides.</strong> Hiding a
+      control in the interface is presentation, not permission. Learning that the
+      client-side check is a convenience and the server-side check is the actual
+      boundary was worth the whole project.
+    </li>
+    <li>
+      <strong>Error states are most of the surface area.</strong> The happy path
+      was a fraction of the code by the time it behaved reasonably.
+    </li>
+  </ul>
+
+  <h2>Status</h2>
+  <p>
+    Archived. It is not code I would write today, which is roughly the point of
+    leaving it up.
+  </p>
+</Work>
