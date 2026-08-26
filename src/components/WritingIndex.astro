@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { SITE } from '../config';
-import { formatDate, t, type Lang } from '../i18n';
+import { t, type Lang } from '../i18n';
 import { getPosts, urlOf } from '../lib/writing';
 
 interface Props {
@@ -53,9 +53,6 @@ const schema = {
                   </div>
                   <div class="entry__meta">
                     <span class="label">{post.data.category}</span>
-                    <time class="label" datetime={post.data.date.toISOString()}>
-                      {formatDate(post.data.date, lang)}
-                    </time>
                   </div>
                 </a>
               </li>
