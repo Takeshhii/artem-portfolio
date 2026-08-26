@@ -1,0 +1,154 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../config';
+import { formatDate, t, type Lang } from '../i18n';
+import { getPosts, urlOf } from '../lib/writing';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t[lang];
+const posts = await getPosts(lang);
+
+const alternates = { en: '/writing', ru: '/ru/writing' };
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: `${SITE.name} — ${s.writing.label}`,
+  url: new URL(Astro.url.pathname, SITE.url).href,
+  inLanguage: lang,
+  author: { '@type': 'Person', name: SITE.name, url: SITE.url },
+};
+---
+
+<Base
+  title={`${s.writing.label} — ${SITE.name}`}
+  description={s.writing.lead}
+  lang={lang}
+  alternates={alternates}
+  schema={schema}
+>
+  <section class="head">
+    <div class="wrap">
+      <p class="label">{s.writing.label}</p>
+      <h1 class="head__title">{s.writing.title}</h1>
+      <p class="lead head__lead">{s.writing.lead}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      {
+        posts.length > 0 ? (
+          <ul class="list">
+            {posts.map((post) => (
+              <li>
+                <a class="entry" href={urlOf(post)}>
+                  <div class="entry__main">
+                    <h2 class="entry__title">{post.data.title}</h2>
+                    <p class="entry__excerpt">{post.data.excerpt}</p>
+                  </div>
+                  <div class="entry__meta">
+                    <span class="label">{post.data.category}</span>
+                    <time class="label" datetime={post.data.date.toISOString()}>
+                      {formatDate(post.data.date, lang)}
+                    </time>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="lead">{s.writing.empty}</p>
+        )
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2.5rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .head__title {
+    font-size: clamp(2.25rem, 1.7rem + 2.6vw, 3.75rem);
+    max-width: 20ch;
+    margin-block: 1rem 1.5rem;
+  }
+
+  .head__lead {
+    max-width: 58ch;
+  }
+
+  .list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .list li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .list li:first-child {
+    border-top: 1px solid var(--line);
+  }
+
+  .entry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    padding: 1.75rem 0;
+    transition: padding-left 0.22s ease;
+  }
+
+  .entry:hover {
+    padding-left: 0.5rem;
+  }
+
+  .entry__title {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 560;
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+  }
+
+  .entry:hover .entry__title {
+    color: var(--accent);
+  }
+
+  .entry__excerpt {
+    margin-top: 0.5rem;
+    max-width: 62ch;
+    color: var(--ink-soft);
+    font-size: 0.9375rem;
+  }
+
+  .entry__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .entry {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .entry__meta {
+      flex-direction: row;
+      gap: 0.75rem;
+      text-align: left;
+    }
+  }
+</style>

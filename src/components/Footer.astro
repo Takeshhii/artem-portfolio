@@ -1,5 +1,13 @@
 ---
 import { LINKS, SITE } from '../config';
+import { t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const s = t[lang].footer;
 const year = new Date().getFullYear();
 ---
 
@@ -7,26 +15,21 @@ const year = new Date().getFullYear();
   <div class="wrap">
     <div class="footer__top">
       <div>
-        <p class="label">Connect</p>
-        <h2 class="footer__head">
-          Open to AI, growth and product work.
-        </h2>
-        <p class="lead footer__lead">
-          If you're building something at the intersection of growth, automation and
-          product — or want to talk about a role — I'd like to hear about it.
-        </p>
+        <p class="label">{s.label}</p>
+        <h2 class="footer__head">{s.head}</h2>
+        <p class="lead footer__lead">{s.lead}</p>
       </div>
 
       <ul class="footer__links">
         <li>
           <a href={`mailto:${LINKS.email}`}>
-            <span class="label">Email</span>
+            <span class="label">{s.email}</span>
             <span class="footer__value">{LINKS.email}</span>
           </a>
         </li>
         <li>
           <a href={LINKS.github} target="_blank" rel="noopener">
-            <span class="label">GitHub</span>
+            <span class="label">{s.github}</span>
             <span class="footer__value">github.com/Takeshhii</span>
           </a>
         </li>
@@ -34,8 +37,8 @@ const year = new Date().getFullYear();
           LINKS.linkedin && (
             <li>
               <a href={LINKS.linkedin} target="_blank" rel="noopener">
-                <span class="label">LinkedIn</span>
-                <span class="footer__value">Profile</span>
+                <span class="label">{s.linkedin}</span>
+                <span class="footer__value">{s.profile}</span>
               </a>
             </li>
           )

@@ -1,0 +1,416 @@
+---
+import Base from '../layouts/Base.astro';
+import { LINKS, SITE } from '../config';
+import type { Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  en: {
+    label: 'About',
+    title: 'Artem Tarasov — growth, automation and product.',
+    lead: 'I work at the intersection of growth, AI and software. My background is in SEO and digital growth; what I build now is the automation and product layer underneath it.',
+    nowLabel: 'What I do now',
+    now: [
+      'Building **AIRA**, an AI career platform for students, as founder. It combines job discovery, matching and application workflows, and is part of the Business Incubator programme at the Financial University.',
+      'Running **NFC MSK**, an NFC products business, where I own growth, search and the site infrastructure end to end.',
+      'Working with **Premier Label Water Company** (US) on B2B digital marketing — Klaviyo segmentation, campaign structure and email content.',
+      'Writing about what I build. The [writing section](/writing) has the technical detail.',
+    ],
+    pathLabel: 'Path',
+    path: [
+      {
+        period: '2026 — now',
+        role: 'Digital Marketing Assistant',
+        org: 'Premier Label Water Company',
+        note: 'B2B digital marketing for a US custom-branded bottled water company. Remote.',
+      },
+      {
+        period: '2025 — now',
+        role: 'Founder',
+        org: 'AIRA',
+        note: 'AI career platform for students. Product direction, organic acquisition, AI-assisted career workflows.',
+      },
+      {
+        period: '2025 — now',
+        role: 'Founder — Growth & SEO',
+        org: 'NFC MSK',
+        note: 'NFC products business. Custom WordPress theme with technical SEO infrastructure built from scratch.',
+      },
+      {
+        period: '2025 — now',
+        role: 'SEO Specialist / Web Administrator',
+        org: 'Pinbox',
+        note: 'Search and web administration across 12+ sites as one system.',
+      },
+      {
+        period: '2024 — 2025',
+        role: 'SEO Specialist',
+        org: 'WEBJesus',
+        note: 'Commercial SEO in an agency setting — audits, semantics, content structure.',
+      },
+      {
+        period: '2024 — 2025',
+        role: 'Frontend Developer / Web Administrator',
+        org: 'Луч Знаний',
+        note: 'WordPress and CodeIgniter development, API integrations, site administration.',
+      },
+      {
+        period: '2023 — 2024',
+        role: 'Frontend Developer / SEO Specialist',
+        org: 'Uploadify',
+        note: 'Jewellery aggregator aimed at the US market. Where frontend work and search work first met.',
+      },
+      {
+        period: '2021 — 2022',
+        role: 'Junior IT Specialist',
+        org: 'ДСК АВТОБАН',
+        note: 'First job.',
+      },
+    ],
+    eduLabel: 'Education',
+    edu: [
+      {
+        period: '2025 — 2029',
+        degree: "Bachelor's, Business Informatics",
+        org: 'Financial University under the Government of the Russian Federation',
+        note: 'Specialization: Digital Transformation of Business Management. Moscow.',
+      },
+      {
+        period: '2021 — 2024',
+        degree: 'Diploma of Secondary Vocational Education, Information Systems and Programming',
+        org: 'Academy of Urban Environment Management, Urban Planning and Printing',
+        note: 'Saint Petersburg.',
+      },
+    ],
+    elsewhereLabel: 'Elsewhere',
+    contactNote: 'The fastest way to reach me is email.',
+  },
+  ru: {
+    label: 'Обо мне',
+    title: 'Артём Тарасов — рост, автоматизация и продукт.',
+    lead: 'Я работаю на стыке роста, AI и разработки. Мой опыт начинался с SEO и digital-роста; сейчас я строю слой автоматизации и продукта под ним.',
+    nowLabel: 'Чем занимаюсь сейчас',
+    now: [
+      'Строю **AIRA** — AI-платформу для карьеры студентов, как основатель. Она объединяет поиск вакансий, мэтчинг и работу с откликами и участвует в программе бизнес-инкубатора Финансового университета.',
+      'Веду **NFC MSK** — бизнес NFC-продукции, где отвечаю за рост, поиск и инфраструктуру сайта целиком.',
+      'Работаю с **Premier Label Water Company** (США) над B2B digital-маркетингом: сегментация в Klaviyo, структура кампаний и контент рассылок.',
+      'Пишу о том, что строю. Технические детали — в [разделе со статьями](/ru/writing).',
+    ],
+    pathLabel: 'Путь',
+    path: [
+      {
+        period: '2026 — сейчас',
+        role: 'Digital Marketing Assistant',
+        org: 'Premier Label Water Company',
+        note: 'B2B digital-маркетинг для американского производителя воды под брендом заказчика. Удалённо.',
+      },
+      {
+        period: '2025 — сейчас',
+        role: 'Основатель',
+        org: 'AIRA',
+        note: 'AI-платформа для карьеры студентов. Продуктовое направление, органический трафик, AI-сценарии карьерной помощи.',
+      },
+      {
+        period: '2025 — сейчас',
+        role: 'Основатель — Growth & SEO',
+        org: 'NFC MSK',
+        note: 'Бизнес NFC-продукции. Собственная тема WordPress с технической SEO-инфраструктурой, написанная с нуля.',
+      },
+      {
+        period: '2025 — сейчас',
+        role: 'SEO-специалист / веб-администратор',
+        org: 'Pinbox',
+        note: 'Поиск и администрирование 12+ сайтов как одной системы.',
+      },
+      {
+        period: '2024 — 2025',
+        role: 'SEO-специалист',
+        org: 'WEBJesus',
+        note: 'Коммерческое SEO в агентстве: аудиты, семантика, структура контента.',
+      },
+      {
+        period: '2024 — 2025',
+        role: 'Frontend-разработчик / веб-администратор',
+        org: 'Луч Знаний',
+        note: 'Разработка на WordPress и CodeIgniter, интеграции с API, администрирование сайтов.',
+      },
+      {
+        period: '2023 — 2024',
+        role: 'Frontend-разработчик / SEO-специалист',
+        org: 'Uploadify',
+        note: 'Агрегатор украшений под рынок США. Место, где фронтенд и поиск впервые сошлись.',
+      },
+      {
+        period: '2021 — 2022',
+        role: 'Junior IT-специалист',
+        org: 'ДСК АВТОБАН',
+        note: 'Первая работа.',
+      },
+    ],
+    eduLabel: 'Образование',
+    edu: [
+      {
+        period: '2025 — 2029',
+        degree: 'Бакалавриат, бизнес-информатика',
+        org: 'Финансовый университет при Правительстве Российской Федерации',
+        note: 'Профиль: цифровая трансформация управления бизнесом. Москва.',
+      },
+      {
+        period: '2021 — 2024',
+        degree: 'Диплом СПО, информационные системы и программирование',
+        org: 'Академия управления городской средой, градостроительства и печати',
+        note: 'Санкт-Петербург.',
+      },
+    ],
+    elsewhereLabel: 'Ещё',
+    contactNote: 'Быстрее всего до меня добраться письмом.',
+  },
+} as const;
+
+const c = copy[lang];
+const alternates = { en: '/about', ru: '/ru/about' };
+
+/** Minimal markdown: **bold** and [text](href). */
+function rich(s: string): string {
+  return s
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+}
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    mainEntity: {
+      '@type': 'Person',
+      name: lang === 'ru' ? 'Артём Тарасов' : 'Artem Tarasov',
+      alternateName: lang === 'ru' ? 'Artem Tarasov' : 'Артём Тарасов',
+      url: SITE.url,
+      jobTitle: 'Growth, Automation & Product',
+      description: c.lead,
+      email: `mailto:${LINKS.email}`,
+      sameAs: [LINKS.github, LINKS.linkedin].filter(Boolean),
+      knowsAbout: [
+        'Technical SEO',
+        'Marketing automation',
+        'Large language model workflows',
+        'Growth engineering',
+        'Product development',
+        'WordPress',
+        'Shopify',
+        'TypeScript',
+      ],
+      alumniOf: c.edu.map((e) => ({
+        '@type': 'EducationalOrganization',
+        name: e.org,
+      })),
+      worksFor: {
+        '@type': 'Organization',
+        name: 'AIRA',
+        url: 'https://student-aira.com',
+      },
+    },
+  },
+];
+---
+
+<Base
+  title={`${c.label} — ${SITE.name}`}
+  description={c.lead}
+  lang={lang}
+  alternates={alternates}
+  schema={schema}
+>
+  <section class="head">
+    <div class="wrap wrap--narrow">
+      <p class="label">{c.label}</p>
+      <h1 class="head__title">{c.title}</h1>
+      <p class="lead head__lead">{c.lead}</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap--narrow">
+      <p class="label block__label">{c.nowLabel}</p>
+      <ul class="now">
+        {c.now.map((item) => <li set:html={rich(item)} />)}
+      </ul>
+
+      <p class="label block__label">{c.pathLabel}</p>
+      <ol class="path">
+        {
+          c.path.map((row) => (
+            <li class="path__row">
+              <span class="path__period label">{row.period}</span>
+              <span class="path__main">
+                <span class="path__role">{row.role}</span>
+                <span class="path__org">{row.org}</span>
+                <span class="path__note">{row.note}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="label block__label">{c.eduLabel}</p>
+      <ol class="path">
+        {
+          c.edu.map((row) => (
+            <li class="path__row">
+              <span class="path__period label">{row.period}</span>
+              <span class="path__main">
+                <span class="path__role">{row.degree}</span>
+                <span class="path__org">{row.org}</span>
+                <span class="path__note">{row.note}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+
+      <p class="label block__label">{c.elsewhereLabel}</p>
+      <ul class="links">
+        <li><a href={LINKS.github} target="_blank" rel="noopener">GitHub</a></li>
+        {LINKS.linkedin && (
+          <li><a href={LINKS.linkedin} target="_blank" rel="noopener">LinkedIn</a></li>
+        )}
+        <li><a href={`mailto:${LINKS.email}`}>{LINKS.email}</a></li>
+      </ul>
+      <p class="note">{c.contactNote}</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .wrap--narrow {
+    max-width: var(--wrap-narrow);
+  }
+
+  .head {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(2.5rem, 5vw, 3.5rem);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .head__title {
+    font-size: clamp(2.1rem, 1.6rem + 2.4vw, 3.35rem);
+    max-width: 20ch;
+    margin-block: 1rem 1.5rem;
+  }
+
+  .head__lead {
+    max-width: 60ch;
+  }
+
+  .block__label {
+    display: block;
+    margin-top: 3rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .block__label:first-child {
+    margin-top: 0;
+  }
+
+  .now {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .now li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+
+  .now :global(strong) {
+    color: var(--ink);
+    font-weight: 560;
+  }
+
+  .now :global(a) {
+    color: var(--accent);
+    border-bottom: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+
+  .path {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .path__row {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .path__period {
+    white-space: nowrap;
+    padding-top: 0.15rem;
+  }
+
+  .path__main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .path__role {
+    font-weight: 560;
+    letter-spacing: -0.01em;
+  }
+
+  .path__org {
+    color: var(--accent);
+    font-size: 0.9375rem;
+  }
+
+  .path__note {
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  .links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .links li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .links a {
+    display: block;
+    padding: 0.9rem 0;
+    color: var(--ink-soft);
+    transition: color 0.2s ease, padding-left 0.2s ease;
+  }
+
+  .links a:hover {
+    color: var(--accent);
+    padding-left: 0.5rem;
+  }
+
+  .note {
+    margin-top: 1.5rem;
+    color: var(--muted);
+    font-size: 0.9375rem;
+  }
+
+  @media (max-width: 640px) {
+    .path__row {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+  }
+</style>

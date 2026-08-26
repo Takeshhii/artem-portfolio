@@ -4,11 +4,9 @@ import BrowserFrame from '../components/BrowserFrame.astro';
 import WorkItem from '../components/WorkItem.astro';
 import FlowDiagram from '../components/FlowDiagram.astro';
 import { LINKS, SITE } from '../config';
-import { getCollection } from 'astro:content';
+import { getPosts, urlOf } from '../lib/writing';
 
-const articles = (await getCollection('writing', ({ data }) => !data.draft)).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const articles = await getPosts('en');
 
 const areas = [
   {
@@ -295,39 +293,25 @@ const schema = [
         <a class="label section-head__link" href="/writing">All writing →</a>
       </div>
 
-      {
-        articles.length > 0 ? (
-          <ul class="posts">
-            {articles.slice(0, 3).map((post) => (
-              <li>
-                <a class="post" href={`/writing/${post.id}`}>
-                  <span class="post__title">{post.data.title}</span>
-                  <span class="post__meta label">
-                    {post.data.category} ·{' '}
-                    {post.data.date.toLocaleDateString('en-GB', {
-                      day: 'numeric',
-                      month: 'short',
-                      year: 'numeric',
-                    })}
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div class="empty reveal">
-            <p class="lead">
-              Notes on AI automation, growth systems and building products — first
-              pieces in progress.
-            </p>
-            <p class="empty__note">
-              Topics I'm writing about: automating an SEO content pipeline with LLMs,
-              what should and shouldn't be automated in search, and product lessons
-              from building an AI career assistant.
-            </p>
-          </div>
-        )
-      }
+      <ul class="posts">
+        {
+          articles.slice(0, 6).map((post) => (
+            <li>
+              <a class="post" href={urlOf(post)}>
+                <span class="post__title">{post.data.title}</span>
+                <span class="post__meta label">
+                  {post.data.category} ·{' '}
+                  {post.data.date.toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                </span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 

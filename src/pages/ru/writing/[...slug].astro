@@ -1,0 +1,13 @@
+---
+import ArticlePage from '../../../components/ArticlePage.astro';
+import { getPosts, slugOf } from '../../../lib/writing';
+
+export async function getStaticPaths() {
+  const posts = await getPosts('ru');
+  return posts.map((post) => ({ params: { slug: slugOf(post) }, props: { post } }));
+}
+
+const { post } = Astro.props;
+---
+
+<ArticlePage post={post} lang="ru" />

@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../config';
+import { DEFAULT_LANG, LANGS, hrefLang, htmlLang, t, type Lang } from '../i18n';
 
 interface Props {
   title?: string;
@@ -12,6 +13,12 @@ interface Props {
   /** Rendered into <head> as JSON-LD. */
   schema?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
+  lang?: Lang;
+  /**
+   * Root-relative paths to this page in each locale. When a counterpart
+   * exists, both get hreflang alternates and the header shows a switcher.
+   */
+  alternates?: Partial<Record<Lang, string>>;
 }
 
 const {
@@ -20,15 +27,28 @@ const {
   ogImage = '/og/default.png',
   schema,
   noindex = false,
+  lang = DEFAULT_LANG,
+  alternates,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, SITE.url).href.replace(/(.+)\/$/, '$1');
 const ogUrl = new URL(ogImage, SITE.url).href;
 const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
+
+const alt = alternates ?? {};
+const altEntries = LANGS.filter((l) => alt[l]).map((l) => ({
+  lang: l,
+  href: new URL(alt[l]!, SITE.url).href.replace(/(.+)\/$/, '$1'),
+}));
+
+const other = LANGS.find((l) => l !== lang && alt[l]);
+const switchTo = other ? { lang: other, href: alt[other]! } : null;
+
+const strings = t[lang];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang[lang]}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,6 +56,21 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    {
+      altEntries.map((a) => (
+        <link rel="alternate" hreflang={hrefLang[a.lang]} href={a.href} />
+      ))
+    }
+    {
+      altEntries.length > 1 && alt[DEFAULT_LANG] && (
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href={new URL(alt[DEFAULT_LANG]!, SITE.url).href.replace(/(.+)\/$/, '$1')}
+        />
+      )
+    }
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={SITE.name} />
@@ -45,7 +80,7 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
     <meta property="og:image" content={ogUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={lang === 'ru' ? 'ru_RU' : 'en_US'} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -64,12 +99,12 @@ const schemas = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
   </head>
 
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
-    <Nav />
+    <a class="skip-link" href="#main">{strings.skip}</a>
+    <Nav lang={lang} switchTo={switchTo} />
     <main id="main">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
 
     <script>
       // Scroll reveal. Bails out entirely when the visitor prefers reduced motion.

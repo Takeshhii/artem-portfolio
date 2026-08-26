@@ -1,19 +1,53 @@
 ---
-import { NAV, LINKS, SITE } from '../config';
+import { LINKS, SITE } from '../config';
+import { path, t, type Lang } from '../i18n';
+
+interface Props {
+  lang: Lang;
+  switchTo: { lang: Lang; href: string } | null;
+}
+
+const { lang, switchTo } = Astro.props;
+const s = t[lang];
+
+/**
+ * Work and Projects live as anchors on the English homepage, which has no
+ * Russian counterpart — so the Russian shell only links to what exists in
+ * Russian. Same reason the brand points at the Russian index there.
+ */
+const items =
+  lang === 'en'
+    ? [
+        { label: s.nav.work, href: '/#work' },
+        { label: s.nav.projects, href: '/#projects' },
+        { label: s.nav.writing, href: '/writing' },
+        { label: s.nav.about, href: '/about' },
+      ]
+    : [
+        { label: s.nav.writing, href: path('/writing', lang) },
+        { label: s.nav.about, href: path('/about', lang) },
+      ];
+
+const brandHref = lang === 'en' ? '/' : path('/writing', lang);
 ---
 
 <header class="nav" data-nav>
   <div class="wrap nav__inner">
-    <a class="nav__brand" href="/">
+    <a class="nav__brand" href={brandHref}>
       {SITE.name}
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+      {items.map((item) => <a href={item.href}>{item.label}</a>)}
       <span class="nav__sep" aria-hidden="true"></span>
       <a href={LINKS.github} target="_blank" rel="noopener">GitHub</a>
       {LINKS.linkedin && (
         <a href={LINKS.linkedin} target="_blank" rel="noopener">LinkedIn</a>
+      )}
+      {switchTo && (
+        <a class="nav__lang" href={switchTo.href} hreflang={switchTo.lang} rel="alternate">
+          {s.langSwitch}
+        </a>
       )}
     </nav>
 
@@ -25,12 +59,17 @@ import { NAV, LINKS, SITE } from '../config';
 
   <div class="nav__mobile" id="mobile-nav" data-nav-panel hidden>
     <div class="wrap nav__mobile-inner">
-      {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+      {items.map((item) => <a href={item.href}>{item.label}</a>)}
       <a href={LINKS.github} target="_blank" rel="noopener">GitHub</a>
       {LINKS.linkedin && (
         <a href={LINKS.linkedin} target="_blank" rel="noopener">LinkedIn</a>
       )}
       <a href={`mailto:${LINKS.email}`}>Email</a>
+      {switchTo && (
+        <a href={switchTo.href} hreflang={switchTo.lang} rel="alternate">
+          {s.langSwitch}
+        </a>
+      )}
     </div>
   </div>
 </header>
@@ -85,6 +124,20 @@ import { NAV, LINKS, SITE } from '../config';
 
   .nav__links a:hover {
     color: var(--accent);
+  }
+
+  .nav__lang {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.6rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+
+  .nav__lang:hover {
+    border-color: var(--accent);
   }
 
   .nav__sep {

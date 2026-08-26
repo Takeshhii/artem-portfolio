@@ -16,12 +16,5 @@ export const SITE = {
 export const LINKS = {
   github: 'https://github.com/Takeshhii',
   email: 'tarasovao2005@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/artem-tarasov-466a72356/',
+  linkedin: 'https://www.linkedin.com/in/tarasov-artem/',
 };
-
-export const NAV = [
-  { label: 'Work', href: '/#work' },
-  { label: 'Projects', href: '/#projects' },
-  { label: 'Writing', href: '/writing' },
-  { label: 'About', href: '/#about' },
-];
