@@ -1,7 +1,7 @@
 ---
 title: 'What changes when you run SEO across a dozen sites instead of one'
 excerpt: 'The work stops being optimisation and becomes inventory. What you need at twelve sites is not better tactics — it is knowing what you have.'
-date: 2026-08-24
+date: 2026-06-01
 category: 'Growth'
 tags: ['SEO', 'Process', 'Operations', 'Automation']
 translationKey: 'seo-across-many-sites'

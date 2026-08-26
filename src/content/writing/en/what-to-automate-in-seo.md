@@ -1,7 +1,7 @@
 ---
 title: 'SEO automation: what to automate and what to leave alone'
 excerpt: 'A working rule after automating a lot of SEO work: automate what is identical every time and cheap to verify. Everything else just produces mistakes faster.'
-date: 2026-08-24
+date: 2026-07-01
 category: 'SEO'
 tags: ['SEO', 'Automation', 'Technical SEO', 'Process']
 translationKey: 'what-to-automate-in-seo'

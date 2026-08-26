@@ -1,7 +1,7 @@
 ---
 title: 'Why I replaced a purchased WordPress theme to get technical SEO control'
 excerpt: 'The theme was not slow or ugly. It was just built so that every search-level decision — URLs, indexation, metadata — had to be fought for.'
-date: 2026-08-24
+date: 2026-07-15
 category: 'SEO'
 tags: ['WordPress', 'PHP', 'Technical SEO', 'E-commerce']
 translationKey: 'wordpress-theme-technical-seo'

@@ -1,7 +1,7 @@
 ---
 title: 'Хоррор-игра, в которой нет ни одного аудиофайла'
 excerpt: 'Весь звук синтезируется в рантайме через Web Audio API. Началось это как ограничение по весу загрузки, а закончилось тем, что именно синтез сделал звук реактивным.'
-date: 2026-08-24
+date: 2025-05-01
 category: 'Engineering'
 tags: ['Web Audio API', 'TypeScript', 'Геймдев', 'Звук']
 translationKey: 'web-audio-game-sound-no-files'

@@ -1,7 +1,7 @@
 ---
 title: 'Building an AI career platform: what matching actually has to solve'
 excerpt: 'The hard part of job matching is not similarity scoring. It is that the two sides describe the same job in different vocabularies, and one side is guessing.'
-date: 2026-08-24
+date: 2025-12-01
 category: 'Product'
 tags: ['AI', 'Product', 'LLM', 'Next.js']
 translationKey: 'building-ai-career-platform'

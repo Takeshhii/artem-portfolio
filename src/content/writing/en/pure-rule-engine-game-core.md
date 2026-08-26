@@ -1,7 +1,7 @@
 ---
 title: 'A pure rule engine at the centre of a game — and the thing I kept out of it'
 excerpt: 'The engine checks documents against rules and returns conflicts. What it deliberately does not know is whether the visitor is human. That omission is the design.'
-date: 2026-08-24
+date: 2025-04-01
 category: 'Engineering'
 tags: ['TypeScript', 'Architecture', 'Testing', 'Game Development']
 translationKey: 'pure-rule-engine-game-core'

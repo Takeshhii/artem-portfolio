@@ -1,7 +1,7 @@
 ---
 title: 'Building an LLM content pipeline that publishes to WordPress'
 excerpt: 'A generation step is the easy part. The pipeline only became useful once validation, scheduling and resumable state were in front of it.'
-date: 2026-08-24
+date: 2026-08-01
 category: 'Automation'
 tags: ['LLM', 'Python', 'WordPress', 'SEO', 'Automation']
 translationKey: 'llm-content-pipeline-wordpress'

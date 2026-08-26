@@ -1,7 +1,7 @@
 ---
 title: 'Shipping a horror game with zero audio files'
 excerpt: 'Every sound in the game is synthesized at runtime through the Web Audio API. That started as a constraint about download size and turned into the thing that made the audio reactive.'
-date: 2026-08-24
+date: 2025-05-01
 category: 'Engineering'
 tags: ['Web Audio API', 'TypeScript', 'Game Development', 'Audio']
 translationKey: 'web-audio-game-sound-no-files'

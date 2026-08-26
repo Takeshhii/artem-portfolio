@@ -1,7 +1,7 @@
 ---
 title: 'Making a flat label look wrapped around a bottle, in the browser'
 excerpt: 'Two tricks do almost all the work: a cylindrical remap so the label compresses toward the silhouette, and stealing the real shading out of the photograph instead of painting it.'
-date: 2026-08-24
+date: 2025-10-01
 category: 'Engineering'
 tags: ['TypeScript', 'PixiJS', 'WebGL', 'Graphics', 'React']
 translationKey: 'bottle-label-warping-shading'

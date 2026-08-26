@@ -1,7 +1,7 @@
 ---
 title: 'Shopify SEO: the duplication problems that are built into the platform'
 excerpt: 'Shopify will happily serve the same product at several URLs and split a collection across paginated pages that all look identical. Neither is a bug, and both need a decision.'
-date: 2026-08-24
+date: 2026-03-01
 category: 'SEO'
 tags: ['Shopify', 'Technical SEO', 'E-commerce', 'Growth']
 translationKey: 'shopify-seo-architecture'

@@ -1,7 +1,7 @@
 ---
 title: 'B2B email in a tool built for B2C: segmenting Klaviyo when the buyer is a company'
 excerpt: 'Klaviyo assumes a consumer with a cart. B2B buying is a slow, multi-person process with no purchase event to react to — which changes what a segment should be built from.'
-date: 2026-08-24
+date: 2026-02-01
 category: 'Automation'
 tags: ['Klaviyo', 'Email', 'B2B', 'Marketing Automation']
 translationKey: 'klaviyo-b2b-segmentation'

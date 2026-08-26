@@ -1,7 +1,7 @@
 ---
 title: 'LLM-пайплайн, который публикует статьи в WordPress'
 excerpt: 'Генерация — самая простая часть. Пайплайн стал полезным только тогда, когда перед ней появились валидация, расписание и восстановимое состояние.'
-date: 2026-08-24
+date: 2026-08-01
 category: 'Automation'
 tags: ['LLM', 'Python', 'WordPress', 'SEO', 'Автоматизация']
 translationKey: 'llm-content-pipeline-wordpress'
