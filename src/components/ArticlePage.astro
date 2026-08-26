@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { render } from 'astro:content';
 import { SITE, LINKS } from '../config';
-import { path, t, type Lang } from '../i18n';
+import { formatDate, path, t, type Lang } from '../i18n';
 import { alternatesFor, type Post } from '../lib/writing';
 
 interface Props {
@@ -15,6 +15,7 @@ const { Content, remarkPluginFrontmatter } = await render(post);
 
 const s = t[lang];
 const readingTime = remarkPluginFrontmatter?.minutesRead ?? null;
+const dateLabel = formatDate(post.data.date, lang);
 const alternates = await alternatesFor(post);
 
 const schema = {
@@ -46,13 +47,10 @@ const schema = {
         <p class="label article__cat rise">{post.data.category}</p>
         <h1 class="article__title rise" style="--i:1">{post.data.title}</h1>
         <p class="lead article__excerpt rise" style="--i:2">{post.data.excerpt}</p>
-        {
-          readingTime && (
-            <p class="label article__meta">
-              <span>{readingTime}</span>
-            </p>
-          )
-        }
+        <p class="label article__meta">
+          <time datetime={post.data.date.toISOString()}>{dateLabel}</time>
+          {readingTime && <span> · {readingTime}</span>}
+        </p>
       </div>
     </header>
 

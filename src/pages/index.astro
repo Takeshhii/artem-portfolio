@@ -300,7 +300,14 @@ const schema = [
             <li>
               <a class="post lift" href={urlOf(post)}>
                 <span class="post__title">{post.data.title}</span>
-                <span class="post__meta label">{post.data.category}</span>
+                <span class="post__meta label">
+                  {post.data.category} ·{' '}
+                  {post.data.date.toLocaleDateString('en-GB', {
+                    day: 'numeric',
+                    month: 'short',
+                    year: 'numeric',
+                  })}
+                </span>
               </a>
             </li>
           ))
