@@ -14,6 +14,40 @@ translationKey: 'wordpress-theme-technical-seo'
 дизайне. Дело было в том, что каждое решение на уровне поиска приходилось принимать
 *против* темы, а не вместе с ней.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 300" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>URL rules assembled in three places, versus one owner</title>
+  <text x="16" y="30" font-size="13" font-weight="600" fill="var(--accent-rose)">PURCHASED THEME</text>
+  <g font-size="12.5" fill="currentColor">
+    <rect x="16" y="52" width="150" height="40" rx="7" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <text x="91" y="77" text-anchor="middle">permalink settings</text>
+    <rect x="16" y="106" width="150" height="40" rx="7" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <text x="91" y="131" text-anchor="middle">theme options</text>
+    <rect x="16" y="160" width="150" height="40" rx="7" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <text x="91" y="185" text-anchor="middle">bundled plugin</text>
+    <rect x="16" y="214" width="150" height="40" rx="7" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <text x="91" y="239" text-anchor="middle">redirect plugin</text>
+  </g>
+  <g stroke="var(--accent-rose)" stroke-width="1.2" opacity="0.75" stroke-dasharray="4 3">
+    <line x1="166" y1="72" x2="268" y2="140"/>
+    <line x1="166" y1="126" x2="268" y2="146"/>
+    <line x1="166" y1="180" x2="268" y2="154"/>
+    <line x1="166" y1="234" x2="268" y2="162"/>
+  </g>
+  <rect x="268" y="118" width="118" height="66" rx="8" fill="var(--accent-rose)" fill-opacity="0.12" stroke="var(--accent-rose)" stroke-width="1.4"/>
+  <text x="327" y="146" text-anchor="middle" font-size="12.5" fill="currentColor">what is this</text>
+  <text x="327" y="164" text-anchor="middle" font-size="12.5" fill="currentColor">URL doing?</text>
+  <text x="327" y="206" text-anchor="middle" font-size="11.5" fill="var(--accent-rose)">no single answer</text>
+  <line x1="404" y1="151" x2="452" y2="151" stroke="currentColor" stroke-width="1.4" opacity="0.5"/>
+  <text x="470" y="30" font-size="13" font-weight="600" fill="var(--accent-teal)">STANDALONE THEME</text>
+  <rect x="470" y="106" width="234" height="90" rx="9" fill="var(--accent-teal)" fill-opacity="0.12" stroke="var(--accent-teal)" stroke-width="1.5"/>
+  <text x="587" y="136" text-anchor="middle" font-size="12.5" fill="currentColor">redirects, indexing rules</text>
+  <text x="587" y="156" text-anchor="middle" font-size="12.5" fill="currentColor">and URL structure</text>
+  <text x="587" y="178" text-anchor="middle" font-size="12.5" fill="var(--accent-teal)" font-weight="600">one owner</text>
+</svg>
+<figcaption>До и после. Проблема была не в скорости, а в том, что ни одно место не владело поведением URL целиком.</figcaption>
+</figure>
+
 ## Что значит «воевать с темой»
 
 Коммерческие темы делаются настраиваемыми под максимально широкий круг покупателей.

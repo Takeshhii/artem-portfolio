@@ -160,7 +160,227 @@ ENGINE = wrap(
   <text x="360" y="308" text-anchor="middle" font-size="12.5" fill="currentColor" opacity="0.72">It can never tell you whether the thing at the airlock is a person.</text>''',
 )
 
+# ------------------------------------------------------- 5. theme ownership
+OWNERSHIP = wrap(
+    '0 0 720 300',
+    '''  <title>URL rules assembled in three places, versus one owner</title>
+  <text x="16" y="30" font-size="13" font-weight="600" fill="var(--accent-rose)">PURCHASED THEME</text>
+  <g font-size="12.5" fill="currentColor">
+    <rect x="16" y="52" width="150" height="40" rx="7" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <text x="91" y="77" text-anchor="middle">permalink settings</text>
+    <rect x="16" y="106" width="150" height="40" rx="7" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <text x="91" y="131" text-anchor="middle">theme options</text>
+    <rect x="16" y="160" width="150" height="40" rx="7" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <text x="91" y="185" text-anchor="middle">bundled plugin</text>
+    <rect x="16" y="214" width="150" height="40" rx="7" fill="none" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+    <text x="91" y="239" text-anchor="middle">redirect plugin</text>
+  </g>
+  <g stroke="var(--accent-rose)" stroke-width="1.2" opacity="0.75" stroke-dasharray="4 3">
+    <line x1="166" y1="72" x2="268" y2="140"/>
+    <line x1="166" y1="126" x2="268" y2="146"/>
+    <line x1="166" y1="180" x2="268" y2="154"/>
+    <line x1="166" y1="234" x2="268" y2="162"/>
+  </g>
+  <rect x="268" y="118" width="118" height="66" rx="8" fill="var(--accent-rose)" fill-opacity="0.12" stroke="var(--accent-rose)" stroke-width="1.4"/>
+  <text x="327" y="146" text-anchor="middle" font-size="12.5" fill="currentColor">what is this</text>
+  <text x="327" y="164" text-anchor="middle" font-size="12.5" fill="currentColor">URL doing?</text>
+  <text x="327" y="206" text-anchor="middle" font-size="11.5" fill="var(--accent-rose)">no single answer</text>
+  <line x1="404" y1="151" x2="452" y2="151" stroke="currentColor" stroke-width="1.4" opacity="0.5"/>
+  <text x="470" y="30" font-size="13" font-weight="600" fill="var(--accent-teal)">STANDALONE THEME</text>
+  <rect x="470" y="106" width="234" height="90" rx="9" fill="var(--accent-teal)" fill-opacity="0.12" stroke="var(--accent-teal)" stroke-width="1.5"/>
+  <text x="587" y="136" text-anchor="middle" font-size="12.5" fill="currentColor">redirects, indexing rules</text>
+  <text x="587" y="156" text-anchor="middle" font-size="12.5" fill="currentColor">and URL structure</text>
+  <text x="587" y="178" text-anchor="middle" font-size="12.5" fill="var(--accent-teal)" font-weight="600">one owner</text>''',
+)
+
+# ----------------------------------------------------------- 6. many sites
+FANOUT = wrap(
+    '0 0 720 320',
+    '''  <title>Detection fans out across every site; judgment concentrates on a few</title>
+  <text x="16" y="28" font-size="13" font-weight="600" fill="var(--accent-teal)">DETECTION — scales</text>
+  <rect x="16" y="46" width="150" height="52" rx="8" fill="var(--accent-teal)" fill-opacity="0.12" stroke="var(--accent-teal)" stroke-width="1.4"/>
+  <text x="91" y="70" text-anchor="middle" font-size="12" fill="currentColor">scheduled crawl</text>
+  <text x="91" y="87" text-anchor="middle" font-size="12" fill="currentColor">+ diff</text>
+  <g stroke="var(--accent-teal)" stroke-width="1" opacity="0.6">'''
+    + '\n'.join(
+        f'    <line x1="166" y1="72" x2="300" y2="{34 + i * 22}"/>' for i in range(12)
+    )
+    + '''  </g>
+  <g fill="currentColor" font-size="11">'''
+    + '\n'.join(
+        f'    <circle cx="308" cy="{34 + i * 22}" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>'
+        for i in range(12)
+    )
+    + '''  </g>
+  <text x="330" y="160" font-size="12" fill="currentColor" opacity="0.7">all 12 properties, one report</text>
+  <line x1="16" y1="212" x2="704" y2="212" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+  <text x="16" y="242" font-size="13" font-weight="600" fill="var(--accent)">JUDGMENT — does not scale</text>
+  <rect x="16" y="258" width="150" height="46" rx="8" fill="var(--accent)" fill-opacity="0.12" stroke="var(--accent)" stroke-width="1.4"/>
+  <text x="91" y="286" text-anchor="middle" font-size="12" fill="currentColor">your attention</text>
+  <g stroke="var(--accent)" stroke-width="1.6">
+    <line x1="166" y1="281" x2="300" y2="270"/>
+    <line x1="166" y1="281" x2="300" y2="294"/>
+  </g>
+  <circle cx="308" cy="270" r="5" fill="var(--accent)"/>
+  <circle cx="308" cy="294" r="5" fill="var(--accent)"/>
+  <text x="330" y="275" font-size="12" fill="currentColor" opacity="0.8">the two that carry the commercial value</text>
+  <text x="330" y="299" font-size="12" fill="currentColor" opacity="0.55">the rest get monitoring, not thought</text>''',
+)
+
+# -------------------------------------------------------- 7. shopify URLs
+SHOPIFY = wrap(
+    '0 0 720 300',
+    '''  <title>One product reachable at several URLs</title>
+  <rect x="270" y="18" width="180" height="44" rx="8" fill="var(--accent)" fill-opacity="0.12" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="360" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="var(--accent)">one product</text>
+  <g font-size="11.5" fill="currentColor" font-family="ui-monospace, monospace">
+    <rect x="16" y="104" width="200" height="34" rx="6" fill="var(--accent-teal)" fill-opacity="0.14" stroke="var(--accent-teal)" stroke-width="1.4"/>
+    <text x="116" y="126" text-anchor="middle" fill="currentColor">/products/handle</text>
+    <rect x="248" y="104" width="212" height="34" rx="6" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <text x="354" y="126" text-anchor="middle" opacity="0.7">/collections/a/products/handle</text>
+    <rect x="248" y="150" width="212" height="34" rx="6" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <text x="354" y="172" text-anchor="middle" opacity="0.7">/collections/b/products/handle</text>
+    <rect x="248" y="196" width="212" height="34" rx="6" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <text x="354" y="218" text-anchor="middle" opacity="0.7">/collections/c/products/handle</text>
+    <text x="354" y="252" text-anchor="middle" font-size="11" opacity="0.5" font-family="inherit">...one per collection it sits in</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1" opacity="0.4">
+    <line x1="330" y1="62" x2="140" y2="100"/>
+    <line x1="360" y1="62" x2="354" y2="100"/>
+    <line x1="380" y1="62" x2="420" y2="146"/>
+    <line x1="392" y1="62" x2="440" y2="192"/>
+  </g>
+  <g stroke="var(--accent-teal)" stroke-width="1.5" stroke-dasharray="5 4">
+    <line x1="248" y1="121" x2="220" y2="121"/>
+    <line x1="248" y1="167" x2="150" y2="142"/>
+    <line x1="248" y1="213" x2="150" y2="146"/>
+  </g>
+  <text x="116" y="160" text-anchor="middle" font-size="11.5" fill="var(--accent-teal)" font-weight="600">canonical target</text>
+  <text x="116" y="182" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.65">but the templates link</text>
+  <text x="116" y="198" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.65">to the long form anyway</text>''',
+)
+
+# ---------------------------------------------------------- 8. b2b account
+ACCOUNT = wrap(
+    '0 0 720 300',
+    '''  <title>One profile with a purchase event, versus one account with several people and none</title>
+  <text x="16" y="28" font-size="13" font-weight="600" fill="currentColor" opacity="0.75">WHAT THE TOOL ASSUMES</text>
+  <circle cx="70" cy="82" r="18" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.6"/>
+  <text x="70" y="122" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.75">one person</text>
+  <line x1="96" y1="82" x2="150" y2="82" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+  <rect x="150" y="62" width="112" height="40" rx="7" fill="var(--accent-teal)" fill-opacity="0.14" stroke="var(--accent-teal)" stroke-width="1.3"/>
+  <text x="206" y="87" text-anchor="middle" font-size="12" fill="currentColor">purchase event</text>
+  <line x1="262" y1="82" x2="312" y2="82" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+  <text x="322" y="87" font-size="12" fill="currentColor" opacity="0.75">flow fires</text>
+  <line x1="16" y1="150" x2="704" y2="150" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+  <text x="16" y="182" font-size="13" font-weight="600" fill="var(--accent)">WHAT B2B ACTUALLY IS</text>
+  <rect x="16" y="198" width="196" height="86" rx="9" fill="var(--accent)" fill-opacity="0.09" stroke="var(--accent)" stroke-width="1.4"/>
+  <text x="114" y="220" text-anchor="middle" font-size="12" fill="var(--accent)" font-weight="600">one account</text>
+  <circle cx="58" cy="252" r="13" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
+  <circle cx="114" cy="252" r="13" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
+  <circle cx="170" cy="252" r="13" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
+  <text x="114" y="278" text-anchor="middle" font-size="10.5" fill="currentColor" opacity="0.6">requests · approves · signs</text>
+  <line x1="212" y1="241" x2="266" y2="241" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+  <rect x="266" y="220" width="130" height="42" rx="7" fill="none" stroke="var(--accent-rose)" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="331" y="246" text-anchor="middle" font-size="12" fill="var(--accent-rose)">often no event</text>
+  <text x="418" y="232" font-size="12" fill="currentColor" opacity="0.75">so segment on what they</text>
+  <text x="418" y="252" font-size="12" fill="currentColor" opacity="0.75">state: use case, size, stage,</text>
+  <text x="418" y="272" font-size="12" fill="currentColor" opacity="0.75">whether artwork exists yet</text>''',
+)
+
+# ------------------------------------------------------------ 9. vocabulary
+VOCAB = wrap(
+    '0 0 720 300',
+    '''  <title>Two vocabularies normalised onto shared claims before matching</title>
+  <rect x="16" y="46" width="188" height="80" rx="9" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+  <text x="110" y="70" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor">student CV</text>
+  <text x="110" y="92" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">"REST API for a</text>
+  <text x="110" y="109" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">course project"</text>
+  <rect x="16" y="176" width="188" height="80" rx="9" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+  <text x="110" y="200" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor">vacancy</text>
+  <text x="110" y="222" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">"experience with backend</text>
+  <text x="110" y="239" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">service development"</text>
+  <path d="M204 86 L268 130" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.6"/>
+  <path d="M204 216 L268 172" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.6"/>
+  <rect x="268" y="120" width="164" height="62" rx="9" fill="var(--accent)" fill-opacity="0.11" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="350" y="146" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--accent)">extract claims</text>
+  <text x="350" y="166" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">what · with what · how deep</text>
+  <line x1="432" y1="151" x2="486" y2="151" stroke="currentColor" stroke-width="1.3" opacity="0.6"/>
+  <rect x="486" y="120" width="218" height="62" rx="9" fill="var(--accent-teal)" fill-opacity="0.13" stroke="var(--accent-teal)" stroke-width="1.5"/>
+  <text x="595" y="146" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--accent-teal)">match on the claims</text>
+  <text x="595" y="166" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">not on the wording</text>
+  <text x="360" y="278" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.65">Same evidence, two dialects. Vector similarity alone reads them as barely related.</text>''',
+)
+
+# --------------------------------------------------------- 10. audio chain
+AUDIO = wrap(
+    '0 0 720 260',
+    '''  <title>The hum: two oscillators, a lowpass and an LFO on the gain</title>
+  <defs>
+    <marker id="ar-a" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g font-size="12.5">
+    <rect x="12" y="52" width="112" height="42" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+    <text x="68" y="70" text-anchor="middle" fill="currentColor">sine</text>
+    <text x="68" y="86" text-anchor="middle" fill="var(--accent)" font-family="ui-monospace, monospace" font-size="11">40 Hz</text>
+    <rect x="12" y="116" width="112" height="42" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+    <text x="68" y="134" text-anchor="middle" fill="currentColor">sine</text>
+    <text x="68" y="150" text-anchor="middle" fill="var(--accent)" font-family="ui-monospace, monospace" font-size="11">63 Hz</text>
+    <circle cx="188" cy="105" r="18" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.7"/>
+    <text x="188" y="111" text-anchor="middle" font-size="15" fill="currentColor">+</text>
+    <rect x="248" y="84" width="118" height="42" rx="7" fill="var(--accent)" fill-opacity="0.11" stroke="var(--accent)" stroke-width="1.4"/>
+    <text x="307" y="110" text-anchor="middle" fill="currentColor">lowpass</text>
+    <rect x="410" y="84" width="106" height="42" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+    <text x="463" y="110" text-anchor="middle" fill="currentColor">gain</text>
+    <rect x="560" y="84" width="146" height="42" rx="7" fill="var(--accent-teal)" fill-opacity="0.13" stroke="var(--accent-teal)" stroke-width="1.4"/>
+    <text x="633" y="110" text-anchor="middle" fill="currentColor">out — the hull hum</text>
+    <rect x="410" y="182" width="106" height="40" rx="7" fill="none" stroke="var(--accent-rose)" stroke-width="1.3" stroke-dasharray="5 4"/>
+    <text x="463" y="207" text-anchor="middle" fill="var(--accent-rose)">slow LFO</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1.3" marker-end="url(#ar-a)" opacity="0.75">
+    <line x1="124" y1="73" x2="166" y2="97"/>
+    <line x1="124" y1="137" x2="166" y2="113"/>
+    <line x1="206" y1="105" x2="242" y2="105"/>
+    <line x1="366" y1="105" x2="404" y2="105"/>
+    <line x1="516" y1="105" x2="554" y2="105"/>
+  </g>
+  <line x1="463" y1="182" x2="463" y2="132" stroke="var(--accent-rose)" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ar-a)"/>
+  <text x="360" y="248" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.65">Two close frequencies beat against each other. One sine alone reads as a test tone.</text>''',
+)
+
 FIGURES = {
+    'wordpress-theme-technical-seo': (
+        OWNERSHIP,
+        'Before and after. The problem was never performance — it was that no single place owned what a URL does.',
+        'До и после. Проблема была не в скорости, а в том, что ни одно место не владело поведением URL целиком.',
+    ),
+    'seo-across-many-sites': (
+        FANOUT,
+        'Monitoring goes everywhere. Attention does not — and spreading it evenly across twelve sites is the mistake.',
+        'Мониторинг идёт на всё. Внимание — нет, и размазать его ровно по двенадцати сайтам это и есть ошибка.',
+    ),
+    'shopify-seo-architecture': (
+        SHOPIFY,
+        'Canonicalisation settles which URL is indexed. It does not stop your own templates linking to the other ones.',
+        'Канонизация решает, какой URL индексируется. Она не мешает вашим же шаблонам ссылаться на остальные.',
+    ),
+    'klaviyo-b2b-segmentation': (
+        ACCOUNT,
+        'The unit of the tool is a person with a purchase. The unit of the business is an account with several people and no event.',
+        'Единица инструмента — человек с покупкой. Единица бизнеса — аккаунт с несколькими людьми и без события.',
+    ),
+    'building-ai-career-platform': (
+        VOCAB,
+        'Normalise both sides onto shared claims first. Matching the wording directly is what makes a demo instead of a product.',
+        'Сначала привести обе стороны к общим утверждениям. Сопоставление формулировок напрямую даёт демо, а не продукт.',
+    ),
+    'web-audio-game-sound-no-files': (
+        AUDIO,
+        'The entire room tone. No file is loaded — the atmosphere is four nodes and a modulated gain.',
+        'Весь тон помещения. Ни одного загруженного файла — атмосфера это четыре узла и модулируемая громкость.',
+    ),
     'what-to-automate-in-seo': (
         MATRIX,
         'The two axes. Automation is safe in the lower-left corner and gets dangerous fast in either direction.',

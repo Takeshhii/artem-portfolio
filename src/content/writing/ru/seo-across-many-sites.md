@@ -17,6 +17,54 @@ translationKey: 'seo-across-many-sites'
 Эта модель ломается где-то на третьем-четвёртом сайте, и ломается тихо. Вы не замечаете,
 что потеряли контроль. Вы замечаете страницу, которая шесть недель отдаёт 404.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 320" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Detection fans out across every site; judgment concentrates on a few</title>
+  <text x="16" y="28" font-size="13" font-weight="600" fill="var(--accent-teal)">DETECTION — scales</text>
+  <rect x="16" y="46" width="150" height="52" rx="8" fill="var(--accent-teal)" fill-opacity="0.12" stroke="var(--accent-teal)" stroke-width="1.4"/>
+  <text x="91" y="70" text-anchor="middle" font-size="12" fill="currentColor">scheduled crawl</text>
+  <text x="91" y="87" text-anchor="middle" font-size="12" fill="currentColor">+ diff</text>
+  <g stroke="var(--accent-teal)" stroke-width="1" opacity="0.6">    <line x1="166" y1="72" x2="300" y2="34"/>
+    <line x1="166" y1="72" x2="300" y2="56"/>
+    <line x1="166" y1="72" x2="300" y2="78"/>
+    <line x1="166" y1="72" x2="300" y2="100"/>
+    <line x1="166" y1="72" x2="300" y2="122"/>
+    <line x1="166" y1="72" x2="300" y2="144"/>
+    <line x1="166" y1="72" x2="300" y2="166"/>
+    <line x1="166" y1="72" x2="300" y2="188"/>
+    <line x1="166" y1="72" x2="300" y2="210"/>
+    <line x1="166" y1="72" x2="300" y2="232"/>
+    <line x1="166" y1="72" x2="300" y2="254"/>
+    <line x1="166" y1="72" x2="300" y2="276"/>  </g>
+  <g fill="currentColor" font-size="11">    <circle cx="308" cy="34" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="56" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="78" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="100" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="122" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="144" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="166" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="188" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="210" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="232" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="254" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>
+    <circle cx="308" cy="276" r="3.5" fill="var(--accent-teal)" opacity="0.8"/>  </g>
+  <text x="330" y="160" font-size="12" fill="currentColor" opacity="0.7">all 12 properties, one report</text>
+  <line x1="16" y1="212" x2="704" y2="212" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+  <text x="16" y="242" font-size="13" font-weight="600" fill="var(--accent)">JUDGMENT — does not scale</text>
+  <rect x="16" y="258" width="150" height="46" rx="8" fill="var(--accent)" fill-opacity="0.12" stroke="var(--accent)" stroke-width="1.4"/>
+  <text x="91" y="286" text-anchor="middle" font-size="12" fill="currentColor">your attention</text>
+  <g stroke="var(--accent)" stroke-width="1.6">
+    <line x1="166" y1="281" x2="300" y2="270"/>
+    <line x1="166" y1="281" x2="300" y2="294"/>
+  </g>
+  <circle cx="308" cy="270" r="5" fill="var(--accent)"/>
+  <circle cx="308" cy="294" r="5" fill="var(--accent)"/>
+  <text x="330" y="275" font-size="12" fill="currentColor" opacity="0.8">the two that carry the commercial value</text>
+  <text x="330" y="299" font-size="12" fill="currentColor" opacity="0.55">the rest get monitoring, not thought</text>
+</svg>
+<figcaption>Мониторинг идёт на всё. Внимание — нет, и размазать его ровно по двенадцати сайтам это и есть ошибка.</figcaption>
+</figure>
+
 ## Первой ломается память, а не пропускная способность
 
 Когда сайтов становится больше, инстинкт подсказывает, что надо работать быстрее. Обычно

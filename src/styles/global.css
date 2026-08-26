@@ -13,18 +13,24 @@
    ------------------------------------------------------------------------ */
 :root {
   --bg: #f8f7fa;
-  --surface: #f1eff5;
-  --surface-2: #e9e6ef;
+  --surface: color-mix(in srgb, #f1eff5 78%, transparent);
+  --surface-2: color-mix(in srgb, #e9e6ef 82%, transparent);
   --ink: #17161d;
   --ink-soft: #3f3d4a;
-  --muted: #6f6c7d;
+  --muted: #5f5c6b;
   --line: #e4e0ea;
 
-  /* Iris violet, dark enough to carry body-size text on --bg (~5:1). */
-  --accent: #6f5fa6;
+  /* Text colours are set against the *darkest* point of the pearl wash
+     (where the blooms overlap), not against the flat base — see the canvas
+     measurement in scripts/check-contrast.js. */
+  --accent: #64559a;
   --accent-soft: #9b8dc4;
   --accent-teal: #4f8fa6;
   --accent-rose: #c0839c;
+
+  --wash-rose: #e8cdd8;
+  --wash-teal: #cfe2e8;
+  --wash-iris: #ded7ee;
 
   --nacre: linear-gradient(
     115deg,
@@ -70,6 +76,35 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+}
+
+/* The pearl wash: soft blooms pinned to the viewport, sitting behind
+   everything. Purely decorative — the page is fully legible without it. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(1100px 800px at 10% -10%, var(--wash-rose), transparent 62%),
+    radial-gradient(1000px 760px at 90% 0%, var(--wash-teal), transparent 60%),
+    radial-gradient(940px 940px at 64% 46%, var(--wash-iris), transparent 64%),
+    radial-gradient(820px 720px at 16% 92%, var(--wash-teal), transparent 62%);
+  background-size: 160% 160%;
+  opacity: 0.72;
+  animation: wash-drift 30s ease-in-out infinite alternate;
+}
+
+@keyframes wash-drift {
+  from { background-position: 0% 0%; }
+  to { background-position: 100% 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
 }
 
 body {
@@ -385,7 +420,7 @@ img {
   margin: 0;
   background: var(--nacre);
   background-size: 300% 100%;
-  animation: nacre-drift 18s ease-in-out infinite;
+  animation: nacre-drift 11s ease-in-out infinite;
   opacity: 0.55;
 }
 
@@ -402,8 +437,8 @@ img {
   z-index: -1;
   background: var(--nacre);
   background-size: 220% 220%;
-  opacity: 0.07;
-  animation: nacre-drift 26s ease-in-out infinite;
+  opacity: 0.18;
+  animation: nacre-drift 16s ease-in-out infinite;
   pointer-events: none;
 }
 
@@ -424,7 +459,7 @@ img {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: nacre-drift 14s ease-in-out infinite;
+    animation: nacre-drift 9s ease-in-out infinite;
   }
 }
 
@@ -461,5 +496,29 @@ img {
 
   .lift:hover {
     transform: none;
+  }
+}
+
+/* Iridescent underline that wipes in on hover. */
+.sheen-link {
+  position: relative;
+  background-image: var(--nacre);
+  background-size: 200% 2px;
+  background-repeat: no-repeat;
+  background-position: 0% 100%;
+  padding-bottom: 2px;
+  transition: background-size 0.4s var(--ease-out);
+}
+
+.sheen-link:hover,
+.sheen-link:focus-visible {
+  background-size: 200% 2px;
+  animation: nacre-drift 3s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheen-link:hover,
+  .sheen-link:focus-visible {
+    animation: none;
   }
 }

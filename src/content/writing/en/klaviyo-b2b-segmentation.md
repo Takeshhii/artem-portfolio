@@ -16,6 +16,35 @@ business — where the customer is a company ordering branded product, not a
 consumer buying a bottle — most of the default machinery doesn't apply, and the
 question becomes what to replace it with.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 300" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>One profile with a purchase event, versus one account with several people and none</title>
+  <text x="16" y="28" font-size="13" font-weight="600" fill="currentColor" opacity="0.75">WHAT THE TOOL ASSUMES</text>
+  <circle cx="70" cy="82" r="18" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.6"/>
+  <text x="70" y="122" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.75">one person</text>
+  <line x1="96" y1="82" x2="150" y2="82" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+  <rect x="150" y="62" width="112" height="40" rx="7" fill="var(--accent-teal)" fill-opacity="0.14" stroke="var(--accent-teal)" stroke-width="1.3"/>
+  <text x="206" y="87" text-anchor="middle" font-size="12" fill="currentColor">purchase event</text>
+  <line x1="262" y1="82" x2="312" y2="82" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+  <text x="322" y="87" font-size="12" fill="currentColor" opacity="0.75">flow fires</text>
+  <line x1="16" y1="150" x2="704" y2="150" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+  <text x="16" y="182" font-size="13" font-weight="600" fill="var(--accent)">WHAT B2B ACTUALLY IS</text>
+  <rect x="16" y="198" width="196" height="86" rx="9" fill="var(--accent)" fill-opacity="0.09" stroke="var(--accent)" stroke-width="1.4"/>
+  <text x="114" y="220" text-anchor="middle" font-size="12" fill="var(--accent)" font-weight="600">one account</text>
+  <circle cx="58" cy="252" r="13" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
+  <circle cx="114" cy="252" r="13" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
+  <circle cx="170" cy="252" r="13" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.65"/>
+  <text x="114" y="278" text-anchor="middle" font-size="10.5" fill="currentColor" opacity="0.6">requests · approves · signs</text>
+  <line x1="212" y1="241" x2="266" y2="241" stroke="currentColor" stroke-width="1.2" opacity="0.5"/>
+  <rect x="266" y="220" width="130" height="42" rx="7" fill="none" stroke="var(--accent-rose)" stroke-width="1.4" stroke-dasharray="5 4"/>
+  <text x="331" y="246" text-anchor="middle" font-size="12" fill="var(--accent-rose)">often no event</text>
+  <text x="418" y="232" font-size="12" fill="currentColor" opacity="0.75">so segment on what they</text>
+  <text x="418" y="252" font-size="12" fill="currentColor" opacity="0.75">state: use case, size, stage,</text>
+  <text x="418" y="272" font-size="12" fill="currentColor" opacity="0.75">whether artwork exists yet</text>
+</svg>
+<figcaption>The unit of the tool is a person with a purchase. The unit of the business is an account with several people and no event.</figcaption>
+</figure>
+
 ## Why the default model doesn't transfer
 
 Three differences do most of the damage.

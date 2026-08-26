@@ -13,6 +13,40 @@ Shopify — хорошая платформа, чтобы продавать, и
 
 Работая над органикой ювелирного магазина на Shopify, я столкнулся вот с чем.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 300" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>One product reachable at several URLs</title>
+  <rect x="270" y="18" width="180" height="44" rx="8" fill="var(--accent)" fill-opacity="0.12" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="360" y="46" text-anchor="middle" font-size="13" font-weight="600" fill="var(--accent)">one product</text>
+  <g font-size="11.5" fill="currentColor" font-family="ui-monospace, monospace">
+    <rect x="16" y="104" width="200" height="34" rx="6" fill="var(--accent-teal)" fill-opacity="0.14" stroke="var(--accent-teal)" stroke-width="1.4"/>
+    <text x="116" y="126" text-anchor="middle" fill="currentColor">/products/handle</text>
+    <rect x="248" y="104" width="212" height="34" rx="6" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <text x="354" y="126" text-anchor="middle" opacity="0.7">/collections/a/products/handle</text>
+    <rect x="248" y="150" width="212" height="34" rx="6" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <text x="354" y="172" text-anchor="middle" opacity="0.7">/collections/b/products/handle</text>
+    <rect x="248" y="196" width="212" height="34" rx="6" fill="none" stroke="currentColor" stroke-width="1" opacity="0.45"/>
+    <text x="354" y="218" text-anchor="middle" opacity="0.7">/collections/c/products/handle</text>
+    <text x="354" y="252" text-anchor="middle" font-size="11" opacity="0.5" font-family="inherit">...one per collection it sits in</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1" opacity="0.4">
+    <line x1="330" y1="62" x2="140" y2="100"/>
+    <line x1="360" y1="62" x2="354" y2="100"/>
+    <line x1="380" y1="62" x2="420" y2="146"/>
+    <line x1="392" y1="62" x2="440" y2="192"/>
+  </g>
+  <g stroke="var(--accent-teal)" stroke-width="1.5" stroke-dasharray="5 4">
+    <line x1="248" y1="121" x2="220" y2="121"/>
+    <line x1="248" y1="167" x2="150" y2="142"/>
+    <line x1="248" y1="213" x2="150" y2="146"/>
+  </g>
+  <text x="116" y="160" text-anchor="middle" font-size="11.5" fill="var(--accent-teal)" font-weight="600">canonical target</text>
+  <text x="116" y="182" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.65">but the templates link</text>
+  <text x="116" y="198" text-anchor="middle" font-size="11" fill="currentColor" opacity="0.65">to the long form anyway</text>
+</svg>
+<figcaption>Канонизация решает, какой URL индексируется. Она не мешает вашим же шаблонам ссылаться на остальные.</figcaption>
+</figure>
+
 ## Один товар, несколько URL
 
 Классический пример. Товар доступен сразу по двум адресам:

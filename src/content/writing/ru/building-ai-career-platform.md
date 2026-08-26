@@ -15,6 +15,31 @@ AIRA — карьерная платформа для студентов: пои
 Это заметка о том, что оказалось сложнее ожидаемого, написанная пока проект в работе, а
 не задним числом.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 300" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>Two vocabularies normalised onto shared claims before matching</title>
+  <rect x="16" y="46" width="188" height="80" rx="9" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+  <text x="110" y="70" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor">student CV</text>
+  <text x="110" y="92" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">"REST API for a</text>
+  <text x="110" y="109" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">course project"</text>
+  <rect x="16" y="176" width="188" height="80" rx="9" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.55"/>
+  <text x="110" y="200" text-anchor="middle" font-size="12.5" font-weight="600" fill="currentColor">vacancy</text>
+  <text x="110" y="222" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">"experience with backend</text>
+  <text x="110" y="239" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">service development"</text>
+  <path d="M204 86 L268 130" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.6"/>
+  <path d="M204 216 L268 172" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.6"/>
+  <rect x="268" y="120" width="164" height="62" rx="9" fill="var(--accent)" fill-opacity="0.11" stroke="var(--accent)" stroke-width="1.5"/>
+  <text x="350" y="146" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--accent)">extract claims</text>
+  <text x="350" y="166" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">what · with what · how deep</text>
+  <line x1="432" y1="151" x2="486" y2="151" stroke="currentColor" stroke-width="1.3" opacity="0.6"/>
+  <rect x="486" y="120" width="218" height="62" rx="9" fill="var(--accent-teal)" fill-opacity="0.13" stroke="var(--accent-teal)" stroke-width="1.5"/>
+  <text x="595" y="146" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--accent-teal)">match on the claims</text>
+  <text x="595" y="166" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.75">not on the wording</text>
+  <text x="360" y="278" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.65">Same evidence, two dialects. Vector similarity alone reads them as barely related.</text>
+</svg>
+<figcaption>Сначала привести обе стороны к общим утверждениям. Сопоставление формулировок напрямую даёт демо, а не продукт.</figcaption>
+</figure>
+
 ## Мэтчинг — сначала проблема словаря, и только потом ранжирования
 
 Наивная постановка — оценка похожести: векторизовать резюме, векторизовать вакансию,

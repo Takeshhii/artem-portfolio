@@ -15,6 +15,45 @@ translationKey: 'web-audio-game-sound-no-files'
 иначе оказывается самым тяжёлым, что вы отдаёте. Чего я не предвидел — что синтез изменит
 то, что звук *умеет делать*.
 
+<figure class="diagram-figure">
+<svg class="diagram" viewBox="0 0 720 260" role="img" xmlns="http://www.w3.org/2000/svg">
+  <title>The hum: two oscillators, a lowpass and an LFO on the gain</title>
+  <defs>
+    <marker id="ar-a" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+      <path d="M0,0 L7,3.5 L0,7 z" fill="currentColor"/>
+    </marker>
+  </defs>
+  <g font-size="12.5">
+    <rect x="12" y="52" width="112" height="42" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+    <text x="68" y="70" text-anchor="middle" fill="currentColor">sine</text>
+    <text x="68" y="86" text-anchor="middle" fill="var(--accent)" font-family="ui-monospace, monospace" font-size="11">40 Hz</text>
+    <rect x="12" y="116" width="112" height="42" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+    <text x="68" y="134" text-anchor="middle" fill="currentColor">sine</text>
+    <text x="68" y="150" text-anchor="middle" fill="var(--accent)" font-family="ui-monospace, monospace" font-size="11">63 Hz</text>
+    <circle cx="188" cy="105" r="18" fill="none" stroke="currentColor" stroke-width="1.3" opacity="0.7"/>
+    <text x="188" y="111" text-anchor="middle" font-size="15" fill="currentColor">+</text>
+    <rect x="248" y="84" width="118" height="42" rx="7" fill="var(--accent)" fill-opacity="0.11" stroke="var(--accent)" stroke-width="1.4"/>
+    <text x="307" y="110" text-anchor="middle" fill="currentColor">lowpass</text>
+    <rect x="410" y="84" width="106" height="42" rx="7" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.6"/>
+    <text x="463" y="110" text-anchor="middle" fill="currentColor">gain</text>
+    <rect x="560" y="84" width="146" height="42" rx="7" fill="var(--accent-teal)" fill-opacity="0.13" stroke="var(--accent-teal)" stroke-width="1.4"/>
+    <text x="633" y="110" text-anchor="middle" fill="currentColor">out — the hull hum</text>
+    <rect x="410" y="182" width="106" height="40" rx="7" fill="none" stroke="var(--accent-rose)" stroke-width="1.3" stroke-dasharray="5 4"/>
+    <text x="463" y="207" text-anchor="middle" fill="var(--accent-rose)">slow LFO</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1.3" marker-end="url(#ar-a)" opacity="0.75">
+    <line x1="124" y1="73" x2="166" y2="97"/>
+    <line x1="124" y1="137" x2="166" y2="113"/>
+    <line x1="206" y1="105" x2="242" y2="105"/>
+    <line x1="366" y1="105" x2="404" y2="105"/>
+    <line x1="516" y1="105" x2="554" y2="105"/>
+  </g>
+  <line x1="463" y1="182" x2="463" y2="132" stroke="var(--accent-rose)" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ar-a)"/>
+  <text x="360" y="248" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.65">Two close frequencies beat against each other. One sine alone reads as a test tone.</text>
+</svg>
+<figcaption>Весь тон помещения. Ни одного загруженного файла — атмосфера это четыре узла и модулируемая громкость.</figcaption>
+</figure>
+
 ## Тон помещения — это две синусоиды и фильтр
 
 Базовый слой — ощущение нахождения внутри металлической конструкции под давлением. На
